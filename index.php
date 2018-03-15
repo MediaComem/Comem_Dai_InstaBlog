@@ -3,6 +3,12 @@
 /* --- Chargement de Limonade --- */
 require_once 'lib/limonade.php';
 
+function dump($value) {
+  echo "<pre>";
+  print_r($value);
+  echo "</pre>";
+}
+
 /* --- Configuration de Limonade --- */
 function configure() {
   option('controllers_dir', dirname(__FILE__).'/controllers');
