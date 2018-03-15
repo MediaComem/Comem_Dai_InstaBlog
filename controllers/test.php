@@ -22,7 +22,9 @@ class ArticlePublicitaireOrchestrateur {
     $inputs = [
       "name" => $_POST["name"],
       "pass" => $_POST["pass"],
-      "remember" => filter_has_var(INPUT_POST, 'remember') ? $_POST["remember"] : ""
+      "remember" => filter_has_var(INPUT_POST, 'remember') ? $_POST["remember"] : "",
+      "date" => $_POST["date"]
+      // cf. checkdate et date_parse
     ];
     
     $errors = ArticlePublicitaireModel::validate($inputs);
