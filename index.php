@@ -3,21 +3,23 @@
 /* --- Chargement de Limonade --- */
 require_once 'lib/limonade.php';
 
-function dump($value) {
+function dd($value) {
   echo "<pre>";
   print_r($value);
   echo "</pre>";
+  die();
 }
+
+/* --- Charge la configuration utilisateur --- */
+option('ibConf', include('config.php'));
 
 /* --- Configuration de Limonade --- */
 function configure() {
   option('controllers_dir', dirname(__FILE__).'/controllers');
   option('views_dir', dirname(__FILE__).'/views');
 
-  $user = 'root';
-  $pass = 'root';
   try {
-    $dbh = new PDO('mysql:host=localhost;dbname=mdt_assurance', $user, $pass);
+    $dbh = new PDO('mysql:host='.option('ibConf')['DB_HOST'].';dbname='.option('ibConf')['DB_NAME'], option('ibConf')['DB_USER'], option('ibConf')['DB_PASS']);
   } catch (PDOException $e) {
     halt("Connexion failed: ".$e);
   }
@@ -26,7 +28,7 @@ function configure() {
 
 /* --- Définition du layout principal --- */
 function before() {
-  layout('layouts/main.html.php');
+  layout('layouts/master.html.php');
 }
 
 /* --- Inclusion des routes --- */

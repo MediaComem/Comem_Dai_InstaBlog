@@ -1,0 +1,65 @@
+.success-bg, .card-panel.success {
+  background-color: #e8f5e9; }
+
+.success-txt, .card-panel.success {
+  color: #1b5e20 !important; }
+
+.info-bg, .card-panel.info {
+  background-color: #e0f7fa; }
+
+.info-txt, .card-panel.info {
+  color: #006064 !important; }
+
+.warning-bg, .card-panel.warning {
+  background-color: #fffde7; }
+
+.warning-txt, .card-panel.warning {
+  color: #f57f17 !important; }
+
+.error-bg, .card-panel.error {
+  background-color: #ffebee; }
+
+.error-txt, .card-panel.error {
+  color: #b71c1c !important; }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: #fafafa; }
+
+main {
+  flex: 1 0 auto; }
+
+.input-field:not(.col) label {
+  left: 0 !important; }
+
+.small {
+  font-size: 75%; }
+
+nav ul a.btn-floating {
+  margin-top: 35px !important; }
+
+.card .card-content .row:last-child {
+  margin-bottom: 0; }
+
+#admin .card .card-content > span {
+  display: flex;
+  align-items: center;
+}
+
+#admin .card .card-content > span > i {
+  color: initial;
+  opacity: 0.25;
+  margin-right: 15px;
+  transition: opacity 0.5s;
+}
+
+#admin .card:hover .card-content > span > i {
+  opacity: 0.5;
+}
+
+.page-footer .footer-copyright a:hover,
+.page-footer .footer-copyright a:visited {
+  color: #ffc107 !important;
+  text-decoration: underline; }
