@@ -21,3 +21,8 @@ dispatch_post('/media/create', 'MediaCtrl::store');
 dispatch_get('/post', 'PostCtrl::index');
 dispatch_get('/post/create', 'PostCtrl::create');
 dispatch_post('/post/create', 'PostCtrl::store');
+
+/* --- Message direct --- */
+dispatch_get('/messagedirect', 'MessageDirectCtrl::index');
+dispatch_get('/messagedirect/create', 'MessageDirectCtrl::create');
+dispatch_post('/messagedirect/create', 'MessageDirectCtrl::store');

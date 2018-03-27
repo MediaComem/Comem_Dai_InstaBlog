@@ -15,8 +15,8 @@
                         <!-- ID du média -->
                         <div class="input-field col s12 m6">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" required name="numero" id="numero" value="<?php if (isset($flash['inputs']['numero'])) echo $flash['inputs']['numero']; ?>"/>
-                            <label for="numero">Numéro</label>
+                            <input type="number" min="1" step="1" required name="no" id="no" value="<?php if (isset($flash['inputs']['no'])) echo $flash['inputs']['no']; ?>"/>
+                            <label for="no">Numéro</label>
                         </div>
                         <!-- Date de création du média -->
                         <div class="input-field col s12 m6">

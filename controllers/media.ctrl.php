@@ -28,7 +28,7 @@ class MediaCtrl {
    */
   public static function store() {
     $inputs = [
-      'numero' => filter_has_var(INPUT_POST, 'numero') ? $_POST['numero'] : null,
+      'no' => filter_has_var(INPUT_POST, 'no') ? $_POST['no'] : null,
       'dateCreation' => filter_has_var(INPUT_POST, 'dateCreation') ? $_POST['dateCreation'] : null,
       'url' => filter_has_var(INPUT_POST, 'url') ? $_POST['url'] : null,
       'stockage' => filter_has_var(INPUT_POST, 'stockage') ? $_POST['stockage'] : null,

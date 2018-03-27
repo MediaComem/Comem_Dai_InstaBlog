@@ -15,7 +15,7 @@ class PostCtrl {
   }
 
   /**
-   * Affiche le formulaire permettant de créer un nouvel post
+   * Affiche le formulaire permettant de créer un nouveau post
    */
   public static function create() {
     // Construit la page HTML et la retourne au navigateur
@@ -23,13 +23,13 @@ class PostCtrl {
   }
 
   /**
-   * Enregistre en base de données un nouvel post.
+   * Enregistre en base de données un nouveau post.
    * Vérifie auparavant que les valeurs reçues depuis HTML sont correctes, compte tenu des diverses contraintes.
    */
   public static function store() {
 
     $inputs = [
-      'numero' => filter_has_var(INPUT_POST, 'numero') ? $_POST['numero'] : null,
+      'no' => filter_has_var(INPUT_POST, 'no') ? $_POST['no'] : null,
       'noUtilr' => filter_has_var(INPUT_POST, 'noUtilr') ? $_POST['noUtilr'] : null,
       'dateCreation' => filter_has_var(INPUT_POST, 'dateCreation') ? $_POST['dateCreation'] : null,
       'datePublication' => filter_has_var(INPUT_POST, 'datePublication') ? $_POST['datePublication'] : null,
