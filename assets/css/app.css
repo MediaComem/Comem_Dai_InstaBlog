@@ -59,6 +59,14 @@ nav ul a.btn-floating {
   opacity: 0.5;
 }
 
+#media-list td.media-url {
+  max-width: 30vw;
+}
+
+#post-list td.post-texte {
+  max-width: 15vw;
+}
+
 .page-footer .footer-copyright a:hover,
 .page-footer .footer-copyright a:visited {
   color: #ffc107 !important;

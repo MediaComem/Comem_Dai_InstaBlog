@@ -2,7 +2,7 @@
     <div class="card hoverable">
         <div class="card-content">
             <span class="card-title amber-text text-darken-4">
-                <i class="small material-icons">account_box</i>
+                <i class="small material-icons"><?= $icon ?></i>
                 <span><?= $name ?></span>
             </span>
         </div>

@@ -1,5 +1,5 @@
 <?php content_for('navbar'); ?>
-    <?= partial('layouts/menu-fab.html.php', ['fabUrl' => '/users/create', 'fabTitle' => 'Nouvel utilisateur']) ?>
+    <?= partial('layouts/menu-fab.html.php', ['fabUrl' => '/utilisateur/create', 'fabTitle' => 'Nouvel utilisateur']) ?>
 <?php end_content_for(); ?>
 
 <?php content_for('contentTitle'); ?>

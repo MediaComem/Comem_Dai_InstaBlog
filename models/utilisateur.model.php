@@ -1,6 +1,6 @@
 <?php
 
-class Users {
+class Utilisateur {
   private static $table = 'UTILR';
 
   /**
@@ -16,5 +16,15 @@ class Users {
       return $req->fetchAll();
     }
     return array();
+  }
+
+  /**
+   * Valide que les données contenues dans $inputs respectent les contraintes relatives à un utilisateur.
+   * Retourne un tableau contenant les messages d'erreurs à afficher en cas de problèmes.
+   * Si aucun problème n'est détecté, retourne NULL.
+   * @param {Array} $inputs - Un tableau contenant toutes les valeurs du nouvel Utilisateur à créer
+   */
+  public static function validate(array $inputs) {
+    // TODO
   }
 }

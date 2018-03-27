@@ -26,7 +26,7 @@
         <header class="navbar-fixed">
             <nav class="teal">
                 <div class="nav-wrapper container">
-                    <a class="brand-logo" href="<?= url_for('/')?>">Accueil</a>
+                    <a class="brand-logo" href="<?= url_for('/')?>">InstaBlog</a>
                     <ul class="right">
                         <?php if (isset($navbar)) echo $navbar; ?>
                     </ul>
