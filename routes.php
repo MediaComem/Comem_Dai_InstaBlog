@@ -26,3 +26,23 @@ dispatch_post('/post/create', 'PostCtrl::store');
 dispatch_get('/messagedirect', 'MessageDirectCtrl::index');
 dispatch_get('/messagedirect/create', 'MessageDirectCtrl::create');
 dispatch_post('/messagedirect/create', 'MessageDirectCtrl::store');
+
+/* --- Articles --- */
+dispatch_get('/article', 'ArticleCtrl::index');
+dispatch_get('/article/create', 'ArticleCtrl::create');
+dispatch_post('/article/create', 'ArticleCtrl::store');
+
+/* --- Groupe --- */
+dispatch_get('/groupe', 'GroupeCtrl::index');
+dispatch_get('/groupe/create', 'GroupeCtrl::create');
+dispatch_post('/groupe/create', 'GroupeCtrl::store');
+
+/* --- Suivis --- */
+dispatch_get('/suivi', 'SuiviCtrl::index');
+dispatch_get('/suivi/create', 'SuiviCtrl::create');
+dispatch_post('/suivi/create', 'SuiviCtrl::store');
+
+/* --- Membres --- */
+dispatch_get('/membre', 'MembreCtrl::index');
+dispatch_get('/membre/create', 'MembreCtrl::create');
+dispatch_post('/membre/create', 'MembreCtrl::store');

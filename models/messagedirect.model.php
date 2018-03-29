@@ -1,7 +1,7 @@
 <?php
 
 class MessageDirect {
-  private static $table = 'messdir';
+  private static $table = 'MESSDIR';
 
   /**
    * Récupère tous les enregistrements des messages directs depuis la base de données et les retourne en tant qu'array.

@@ -3,7 +3,7 @@
 <?php end_content_for(); ?>
 
 <?php content_for('contentTitle'); ?>
-    <h3>Nouveau message direct</h3>
+    <h3 class="col s12">Nouveau message direct</h3>
 <?php end_content_for(); ?>
 
 <form action="<?= url_for('/messagedirect/create') ?>" method="post" class="col s12">
@@ -35,12 +35,6 @@
                 <div class="card-content">
                     <span class="card-title amber-text text-darken-4">Message</span>
                     <div class="row">
-                        <!-- ID du message direct -->
-                        <div class="input-field col s12 m6">
-                            <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" required name="no" id="no" value="<?php if (isset($flash['inputs']['no'])) echo $flash['inputs']['no']; ?>"/>
-                            <label for="no">Numéro</label>
-                        </div>
                         <!-- Titre du message direct -->
                         <div class="input-field col s12">
                             <!-- Aucune restriction à faire pour ce champ -->

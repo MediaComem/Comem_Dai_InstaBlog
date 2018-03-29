@@ -3,7 +3,7 @@
 <?php end_content_for(); ?>
 
 <?php content_for('contentTitle'); ?>
-    <h3>Nouvel utilisateur</h3>
+    <h3 class="col s12">Nouvel utilisateur</h3>
 <?php end_content_for(); ?>
 
 <form action="<?= url_for('/utilisateur/create') ?>" method="post" class="col s12">
@@ -12,17 +12,17 @@
             <div class="card">
                 <div class="card-content">
                     <div class="row">
-                        <!-- ID de l'utilisateur -->
-                        <div class="input-field col s12 m6">
-                            <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" required name="no" id="no" value="<?php if (isset($flash['inputs']['no'])) echo $flash['inputs']['no']; ?>"/>
-                            <label for="no">Numéro</label>
-                        </div>
                         <!-- Pseudo de l'utilisateur (doit être unique dans toute la table) -->
                         <div class="input-field col s12 m6">
                             <!-- Aucune restriction à faire pour ce champ -->
                             <input required type="text" name="pseudo" id="pseudo" value="<?php if (isset($flash['inputs']['pseudo'])) echo $flash['inputs']['pseudo']; ?>"/>
                             <label for="pseudo">Pseudo</label>
+                        </div>
+                        <!-- Email de l'utilisateur -->
+                        <div class="input-field col s12 m6">
+                            <!-- Doit être un email -->
+                            <input required type="email" name="email" id="email" value="<?php if (isset($flash['inputs']['email'])) echo $flash['inputs']['email']; ?>"/>
+                            <label for="email">Adresse e-mail</label>
                         </div>
                         <!-- Nom de l'utilisateur -->
                         <div class="input-field col s12 m6">
@@ -41,12 +41,6 @@
                             <!-- Doit être inférieure à aujourd'hui -->
                             <label class="active" for="dateNaissance">Date de naissance</label>
                             <input type="date" name="dateNaissance" id="dateNaissance" required value="<?php if (isset($flash['inputs']['date'])) echo $flash['inputs']['date']; ?>">
-                        </div>
-                        <!-- Email de l'utilisateur -->
-                        <div class="input-field col s12 m6">
-                            <!-- Doit être un email -->
-                            <input required type="email" name="email" id="email" value="<?php if (isset($flash['inputs']['email'])) echo $flash['inputs']['email']; ?>"/>
-                            <label for="email">Adresse e-mail</label>
                         </div>
                         <!-- Téléphone de l'utilisateur -->
                         <div class="input-field col s12 m6">

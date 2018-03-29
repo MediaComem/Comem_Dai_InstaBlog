@@ -28,14 +28,13 @@ class UtilisateurCtrl {
    */
   public static function store() {
     $inputs = [
-      'no' => filter_has_var(INPUT_POST, 'no') ? $_POST['no'] : null,
       'pseudo' => filter_has_var(INPUT_POST, 'pseudo') ? $_POST['pseudo'] : null,
       'nom' => filter_has_var(INPUT_POST, 'nom') ? $_POST['nom'] : null,
       'prenom' => filter_has_var(INPUT_POST, 'prenom') ? $_POST['prenom'] : null,
       'dateNaissance' => filter_has_var(INPUT_POST, 'dateNaissance') ? $_POST['dateNaissance'] : null,
       'email' => filter_has_var(INPUT_POST, 'email') ? $_POST['email'] : null,
-      'telephone' => filter_has_var(INPUT_POST, 'telephone') ? $_POST['telephone'] : null,
-      'sexe' => filter_has_var(INPUT_POST, 'sexe') ? $_POST['sexe'] : null,
+      'telephone' => empty($_POST['telephone']) ? null : $_POST['telephone'],
+      'sexe' => empty($_POST['sexe']) ? null : $_POST['sexe']
     ];
     
     dd($inputs);

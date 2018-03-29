@@ -3,10 +3,10 @@
 <?php end_content_for(); ?>
 
 <?php content_for('contentTitle'); ?>
-    <h3>Tous les messages directs</h3>
+    <h3 class="col s12">Tous les messages directs</h3>
 <?php end_content_for(); ?>
 
-<div class="col s12" id="post-list">
+<div class="col s12" id="messagedirect-list">
     <table class="striped bordered">
         <thead>
             <tr>

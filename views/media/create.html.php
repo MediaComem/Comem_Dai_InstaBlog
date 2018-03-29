@@ -3,7 +3,7 @@
 <?php end_content_for(); ?>
 
 <?php content_for('contentTitle'); ?>
-    <h3>Nouveau média</h3>
+    <h3 class="col s12">Nouveau média</h3>
 <?php end_content_for(); ?>
 
 <form action="<?= url_for('/media/create') ?>" method="post" class="col s12">
@@ -12,12 +12,6 @@
             <div class="card">
                 <div class="card-content">
                     <div class="row">
-                        <!-- ID du média -->
-                        <div class="input-field col s12 m6">
-                            <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" required name="no" id="no" value="<?php if (isset($flash['inputs']['no'])) echo $flash['inputs']['no']; ?>"/>
-                            <label for="no">Numéro</label>
-                        </div>
                         <!-- Date de création du média -->
                         <div class="input-field col s12 m6">
                             <!-- Doit être inférieure à aujourd'hui -->

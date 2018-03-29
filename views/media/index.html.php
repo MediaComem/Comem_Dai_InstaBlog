@@ -3,7 +3,7 @@
 <?php end_content_for(); ?>
 
 <?php content_for('contentTitle'); ?>
-    <h3>Tous les médias</h3>
+    <h3 class="col s12">Tous les médias</h3>
 <?php end_content_for(); ?>
 
 <div class="col s12" id="media-list">
