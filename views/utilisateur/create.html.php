@@ -40,7 +40,7 @@
                         <div class="input-field col s12 m6">
                             <!-- Doit être inférieure à aujourd'hui -->
                             <label class="active" for="dateNaissance">Date de naissance</label>
-                            <input type="date" name="dateNaissance" id="dateNaissance" required value="<?php if (isset($flash['inputs']['date'])) echo $flash['inputs']['date']; ?>">
+                            <input type="date" name="dateNaissance" id="dateNaissance" required value="<?php if (isset($flash['inputs']['dateNaissance'])) echo $flash['inputs']['dateNaissance']; ?>">
                         </div>
                         <!-- Téléphone de l'utilisateur -->
                         <div class="input-field col s12 m6">

@@ -12,6 +12,14 @@ function dd($value) {
   die();
 }
 
+/**
+ * Permet de rediriger l'utilisateur vers une autre route de l'application
+ * @param $path - La route vers laquelle rediriger l'utilisateur.
+ */
+function moveTo($path) {
+  return Header('Location: ?' . $path);
+}
+
 /* --- Chargement de Limonade --- */
 require_once 'lib/limonade.php';
 

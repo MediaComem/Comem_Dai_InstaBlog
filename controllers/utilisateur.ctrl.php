@@ -37,7 +37,12 @@ class UtilisateurCtrl {
       'sexe' => empty($_POST['sexe']) ? null : $_POST['sexe']
     ];
     
-    dd($inputs);
+    // Le deuxième paramètre sera disponible dans la vue
+    flash('info', 'Fonctionnalité à implémenter !');
+    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
+    flash('inputs', $inputs);
+    // Redirige l'utilisateur sur le formulaire de création.
+    return moveTo('/utilisateur/create');
   }
 
 }

@@ -40,7 +40,12 @@ class ArticleCtrl {
       'themes' => filter_has_var(INPUT_POST, 'themes') ? $_POST['themes'] : null
     ];
     
-    dd($inputs);
+    // Le deuxième paramètre sera disponible dans la vue
+    flash('info', 'Fonctionnalité à implémenter !');
+    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
+    flash('inputs', $inputs);
+    // Redirige l'utilisateur sur le formulaire de création.
+    return moveTo('/article/create');
   }
 
 }

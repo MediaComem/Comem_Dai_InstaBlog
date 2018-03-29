@@ -39,7 +39,12 @@ class PostCtrl {
       'noGrpe' => filter_has_var(INPUT_POST, 'noGrpe') ? $_POST['noGrpe'] : null,
     ];
     
-    dd($inputs);
+    // Le deuxième paramètre sera disponible dans la vue
+    flash('info', 'Fonctionnalité à implémenter !');
+    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
+    flash('inputs', $inputs);
+    // Redirige l'utilisateur sur le formulaire de création.
+    return moveTo('/post/create');
   }
 
 }

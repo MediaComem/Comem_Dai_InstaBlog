@@ -35,33 +35,33 @@
         </header>
         <main class="container">
 
+            <?php if (isset($contentTitle)) echo $contentTitle; ?>
+
+            <!-- will be used to show any messages -->
+            <?php if (isset($flash['success'])) {?>
+                <div class="card-panel success"><?= $flash['success']?></div>
+            <?php } ?>
+            <?php if (isset($flash['info'])) {?>
+                <div class="card-panel info"><?= $flash['info']?></div>
+            <?php } ?>
+            <?php if (isset($flash['warning'])) {?>
+                <div class="card-panel warning"><?= $flash['warning']?></div>
+            <?php } ?>
+            <?php if (isset($flash['error'])) {?>
+                <div class="card-panel error"><?= $flash['error']?></div>
+            <?php } ?>
+
+            <?php if (isset($errors) and count($errors) > 0) { ?>
+                <div class="card-panel error">
+                    <?php foreach($errors as $key => $error) { ?>
+                        <ul>
+                            <li><?= $error?></li>
+                        </ul>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+
             <div class="row">
-                <?php if (isset($contentTitle)) echo $contentTitle; ?>
-
-                <!-- will be used to show any messages -->
-                <?php if (isset($flash['success'])) {?>
-                    <div class="card-panel success"><?= $flash['success']?></div>
-                <?php } ?>
-                <?php if (isset($flash['info'])) {?>
-                    <div class="card-panel info"><?= $flash['info']?></div>
-                <?php } ?>
-                <?php if (isset($flash['warning'])) {?>
-                    <div class="card-panel warning"><?= $flash['warning']?></div>
-                <?php } ?>
-                <?php if (isset($flash['error'])) {?>
-                    <div class="card-panel error"><?= $flash['error']?></div>
-                <?php } ?>
-
-                <?php if (isset($errors) and count($errors) > 0) { ?>
-                    <div class="card-panel error">
-                        <?php foreach($errors as $key => $error) { ?>
-                            <ul>
-                                <li><?= $error?></li>
-                            </ul>
-                        <?php } ?>
-                    </div>
-                <?php } ?>
-
                 <?= $content?>
             </div>
 

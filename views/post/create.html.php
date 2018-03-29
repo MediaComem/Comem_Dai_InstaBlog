@@ -26,7 +26,7 @@
                         </div>
                         <!-- Texte du post -->
                         <div class="input-field col s12">
-                            <textarea id="texte" name="texte" class="materialize-textarea"></textarea>
+                            <textarea id="texte" name="texte" class="materialize-textarea"><?php if (isset($flash['inputs']['texte'])) echo $flash['inputs']['texte']; ?></textarea>
                             <label for="texte">Texte - <em>facultatif</em></label>
                         </div>
                         <div class="col s12">

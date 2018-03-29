@@ -34,7 +34,12 @@ class MediaCtrl {
       'stockage' => filter_has_var(INPUT_POST, 'stockage') ? $_POST['stockage'] : null,
     ];
     
-    dd($inputs);
+    // Le deuxième paramètre sera disponible dans la vue
+    flash('info', 'Fonctionnalité à implémenter !');
+    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
+    flash('inputs', $inputs);
+    // Redirige l'utilisateur sur le formulaire de création.
+    return moveTo('/media/create');
   }
 
 }

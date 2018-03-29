@@ -43,7 +43,7 @@
                         </div>
                         <!-- Contenu du message direct -->
                         <div class="input-field col s12">
-                            <textarea id="contenu" name="contenu" class="materialize-textarea"></textarea>
+                            <textarea id="contenu" name="contenu" class="materialize-textarea"><?php if (isset($flash['inputs']['contenu'])) echo $flash['inputs']['contenu']; ?></textarea>
                             <label for="contenu">Contenu</label>
                         </div>
                     </div>

@@ -33,7 +33,12 @@ class MembreCtrl {
       'noUtilr' => filter_has_var(INPUT_POST, 'noUtilr') ? $_POST['noUtilr'] : null,
     ];
     
-    dd($inputs);
+    // Le deuxième paramètre sera disponible dans la vue
+    flash('info', 'Fonctionnalité à implémenter !');
+    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
+    flash('inputs', $inputs);
+    // Redirige l'utilisateur sur le formulaire de création.
+    return moveTo('/membre/create');
   }
 
 }
