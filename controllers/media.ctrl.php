@@ -28,18 +28,28 @@ class MediaCtrl {
    */
   public static function store() {
     $inputs = [
-      'no' => filter_has_var(INPUT_POST, 'no') ? $_POST['no'] : null,
-      'dateCreation' => filter_has_var(INPUT_POST, 'dateCreation') ? $_POST['dateCreation'] : null,
-      'url' => filter_has_var(INPUT_POST, 'url') ? $_POST['url'] : null,
-      'stockage' => filter_has_var(INPUT_POST, 'stockage') ? $_POST['stockage'] : null,
+      ':dateCreation' => empty($_POST['dateCreation']) ? null : $_POST['dateCreation'],
+      ':url' => empty($_POST['url']) ? null : $_POST['url'],
+      ':stockage' => empty($_POST['stockage']) ? null : $_POST['stockage']
     ];
+
+    $errors = Media::validate($inputs);
+
+    if (!empty($errors)) {
+      flash('errors', $errors);
+      flash('inputs', $inputs);
+      return moveTo('/media/create');
+    }
     
-    // Le deuxième paramètre sera disponible dans la vue
-    flash('info', 'Fonctionnalité à implémenter !');
-    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $inputs);
-    // Redirige l'utilisateur sur le formulaire de création.
-    return moveTo('/media/create');
+    try {
+      Media::createOne($inputs);
+      flash('success', "Le média a bien été créé !");
+      return moveTo('/media');
+    } catch(Exception $e) {
+      flash('error', "Erreur lors de l'ajout du nouveau média !");
+      flash('inputs', $inputs);
+      moveTo('/media/create');
+    }
   }
 
 }

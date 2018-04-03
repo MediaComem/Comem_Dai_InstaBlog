@@ -28,11 +28,11 @@ class UtilisateurCtrl {
    */
   public static function store() {
     $inputs = [
-      ':pseudo' => filter_has_var(INPUT_POST, 'pseudo') ? $_POST['pseudo'] : null,
-      ':nom' => filter_has_var(INPUT_POST, 'nom') ? $_POST['nom'] : null,
-      ':prenom' => filter_has_var(INPUT_POST, 'prenom') ? $_POST['prenom'] : null,
+      ':pseudo' => empty($_POST['pseudo']) ? null : $_POST['pseudo'],
+      ':nom' => empty($_POST['nom']) ? null : $_POST['nom'],
+      ':prenom' => empty($_POST['prenom']) ? null : $_POST['prenom'],
       ':dateNaissance' => empty($_POST['dateNaissance']) ? null : $_POST['dateNaissance'],
-      ':email' => filter_has_var(INPUT_POST, 'email') ? $_POST['email'] : null,
+      ':email' => empty($_POST['email']) ? null : $_POST['email'],
       ':telephone' => empty($_POST['telephone']) ? null : $_POST['telephone'],
       ':sexe' => empty($_POST['sexe']) ? null : $_POST['sexe']
     ];
@@ -53,7 +53,7 @@ class UtilisateurCtrl {
     try {
       Utilisateur::createOne($inputs);
       // Le deuxième paramètre sera disponible dans la vue
-      flash('success', "C'est validey !");
+      flash('success', "L'utilisateur ".$inputs['pseudo']." a bien été créé !");
       // Redirige l'utilisateur sur le formulaire de création.
       return moveTo('/utilisateur');
     } catch(Exception $e) {

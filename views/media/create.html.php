@@ -16,12 +16,12 @@
                         <div class="input-field col s12 m6">
                             <!-- Doit être inférieure à aujourd'hui -->
                             <label class="active" for="dateCreation">Date de création</label>
-                            <input type="date" name="dateCreation" id="dateCreation" required value="<?php if (isset($flash['inputs']['dateCreation'])) echo $flash['inputs']['dateCreation']; ?>">
+                            <input type="date" name="dateCreation" id="dateCreation" required value="<?php if (isset($flash['inputs'][':dateCreation'])) echo $flash['inputs'][':dateCreation']; ?>">
                         </div>
                         <!-- Url de stockage du média -->
                         <div class="input-field col s12">
                             <!-- Aucune restriction à faire pour ce champ -->
-                            <input required type="text" name="url" id="url" value="<?php if (isset($flash['inputs']['url'])) echo $flash['inputs']['url']; ?>"/>
+                            <input required type="text" name="url" id="url" value="<?php if (isset($flash['inputs'][':url'])) echo $flash['inputs'][':url']; ?>"/>
                             <label for="url">URL</label>
                         </div>
                         <!--Choix de l'emplacement de stockage -->
@@ -30,11 +30,11 @@
                                 Stockage
                             </p>
                             <p>
-                                <input name="stockage" type="radio" id="stockageInterne" value="interne" <?php if(isset($flash['inputs']['stockage']) and $flash['inputs']['stockage'] === "interne") echo "checked"; ?>/>
+                                <input name="stockage" type="radio" id="stockageInterne" value="interne" <?php if(!isset($flash['inputs'][':stockage']) or (isset($flash['inputs'][':stockage']) and $flash['inputs'][':stockage'] === "interne")) echo "checked"; ?>/>
                                 <label for="stockageInterne">Interne</label>
                             </p>
                             <p>
-                                <input name="stockage" type="radio" id="stockageExterne" value="externe" <?php if(isset($flash['inputs']['stockage']) and $flash['inputs']['stockage'] === "externe") echo "checked"; ?>/>
+                                <input name="stockage" type="radio" id="stockageExterne" value="externe" <?php if(isset($flash['inputs'][':stockage']) and $flash['inputs'][':stockage'] === "externe") echo "checked"; ?>/>
                                 <label for="stockageExterne">Externe</label>
                             </p>
                         </div>
