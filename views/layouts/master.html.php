@@ -51,12 +51,11 @@
                 <div class="card-panel error"><?= $flash['error']?></div>
             <?php } ?>
 
-            <?php if (isset($errors) and count($errors) > 0) { ?>
+            <?php if (isset($flash['errors']) and count($flash['errors']) > 0) { ?>
                 <div class="card-panel error">
-                    <?php foreach($errors as $key => $error) { ?>
-                        <ul>
-                            <li><?= $error?></li>
-                        </ul>
+                    <h5><?= count($flash['errors']) ?> Erreurs</h5>
+                    <?php foreach($flash['errors'] as $key => $error) { ?>
+                        <span><?= $error?></span><br/>
                     <?php } ?>
                 </div>
             <?php } ?>

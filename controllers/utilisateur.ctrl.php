@@ -28,21 +28,42 @@ class UtilisateurCtrl {
    */
   public static function store() {
     $inputs = [
-      'pseudo' => filter_has_var(INPUT_POST, 'pseudo') ? $_POST['pseudo'] : null,
-      'nom' => filter_has_var(INPUT_POST, 'nom') ? $_POST['nom'] : null,
-      'prenom' => filter_has_var(INPUT_POST, 'prenom') ? $_POST['prenom'] : null,
-      'dateNaissance' => filter_has_var(INPUT_POST, 'dateNaissance') ? $_POST['dateNaissance'] : null,
-      'email' => filter_has_var(INPUT_POST, 'email') ? $_POST['email'] : null,
-      'telephone' => empty($_POST['telephone']) ? null : $_POST['telephone'],
-      'sexe' => empty($_POST['sexe']) ? null : $_POST['sexe']
+      ':pseudo' => filter_has_var(INPUT_POST, 'pseudo') ? $_POST['pseudo'] : null,
+      ':nom' => filter_has_var(INPUT_POST, 'nom') ? $_POST['nom'] : null,
+      ':prenom' => filter_has_var(INPUT_POST, 'prenom') ? $_POST['prenom'] : null,
+      ':dateNaissance' => empty($_POST['dateNaissance']) ? null : $_POST['dateNaissance'],
+      ':email' => filter_has_var(INPUT_POST, 'email') ? $_POST['email'] : null,
+      ':telephone' => empty($_POST['telephone']) ? null : $_POST['telephone'],
+      ':sexe' => empty($_POST['sexe']) ? null : $_POST['sexe']
     ];
+
+    $errors = Utilisateur::validate($inputs);
     
-    // Le deuxième paramètre sera disponible dans la vue
-    flash('info', 'Fonctionnalité à implémenter !');
-    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $inputs);
-    // Redirige l'utilisateur sur le formulaire de création.
-    return moveTo('/utilisateur/create');
+    // Si le tableau des erreurs n'est pas vide...
+    if (!empty($errors)) {
+      // Les messages d'erreur seront disponibles dans la vue
+      flash('errors', $errors);
+      // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
+      flash('inputs', $inputs);
+      // Redirige l'utilisateur sur le formulaire de création.
+      return moveTo('/utilisateur/create');
+    // Sinon, c'est que tout est bon !
+    }
+    
+    try {
+      Utilisateur::createOne($inputs);
+      // Le deuxième paramètre sera disponible dans la vue
+      flash('success', "C'est validey !");
+      // Redirige l'utilisateur sur le formulaire de création.
+      return moveTo('/utilisateur');
+    } catch(Exception $e) {
+      // Le message de l'erreur sera disponible dans la vue
+      flash('error', $e->getMessage());
+      // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
+      flash('inputs', $inputs);
+      // Redirige l'utilisateur sur le formulaire de création.
+      return moveTo('/utilisateur/create');
+    }
   }
 
 }

@@ -15,37 +15,37 @@
                         <!-- Pseudo de l'utilisateur (doit être unique dans toute la table) -->
                         <div class="input-field col s12 m6">
                             <!-- Aucune restriction à faire pour ce champ -->
-                            <input required type="text" name="pseudo" id="pseudo" value="<?php if (isset($flash['inputs']['pseudo'])) echo $flash['inputs']['pseudo']; ?>"/>
-                            <label for="pseudo">Pseudo</label>
+                            <input required type="text" name="pseudo" id="pseudo" pattern="[A-Z]{3}" value="<?php if (isset($flash['inputs'][':pseudo'])) echo $flash['inputs'][':pseudo']; ?>"/>
+                            <label for="pseudo">Pseudo - <em>Trois lettres majuscules</em></label>
                         </div>
                         <!-- Email de l'utilisateur -->
                         <div class="input-field col s12 m6">
                             <!-- Doit être un email -->
-                            <input required type="email" name="email" id="email" value="<?php if (isset($flash['inputs']['email'])) echo $flash['inputs']['email']; ?>"/>
+                            <input required type="email" name="email" id="email" value="<?php if (isset($flash['inputs'][':email'])) echo $flash['inputs'][':email']; ?>"/>
                             <label for="email">Adresse e-mail</label>
                         </div>
                         <!-- Nom de l'utilisateur -->
                         <div class="input-field col s12 m6">
                             <!-- Aucune restriction à faire pour ce champ -->
-                            <input required type="text" name="nom" id="nom" value="<?php if (isset($flash['inputs']['nom'])) echo $flash['inputs']['nom']; ?>"/>
+                            <input required type="text" name="nom" id="nom" value="<?php if (isset($flash['inputs'][':nom'])) echo $flash['inputs'][':nom']; ?>"/>
                             <label for="nom">Nom</label>
                         </div>
                         <!-- Prénom de l'utilisateur -->
                         <div class="input-field col s12 m6">
                             <!-- Aucune restriction à faire pour ce champ -->
-                            <input required type="text" name="prenom" id="prenom" value="<?php if (isset($flash['inputs']['prenom'])) echo $flash['inputs']['prenom']; ?>"/>
+                            <input required type="text" name="prenom" id="prenom" value="<?php if (isset($flash['inputs'][':prenom'])) echo $flash['inputs'][':prenom']; ?>"/>
                             <label for="prenom">Prénom</label>
                         </div>
                         <!-- Date de naissance de l'utilisateur -->
                         <div class="input-field col s12 m6">
                             <!-- Doit être inférieure à aujourd'hui -->
                             <label class="active" for="dateNaissance">Date de naissance</label>
-                            <input type="date" name="dateNaissance" id="dateNaissance" required value="<?php if (isset($flash['inputs']['dateNaissance'])) echo $flash['inputs']['dateNaissance']; ?>">
+                            <input type="date" name="dateNaissance" id="dateNaissance" required value="<?php if (isset($flash['inputs'][':dateNaissance'])) echo $flash['inputs'][':dateNaissance']; ?>">
                         </div>
                         <!-- Téléphone de l'utilisateur -->
                         <div class="input-field col s12 m6">
                             <!-- Facultatif, mais doit être un numéro de téléphone -->
-                            <input type="tel" name="telephone" id="telephone" value="<?php if (isset($flash['inputs']['telephone'])) echo $flash['inputs']['telephone']; ?>"/>
+                            <input type="tel" placeholder="+XX XX XXX XX XX" name="telephone" id="telephone" pattern="^\+\d{2}\s\d{2}\s\d{3}(\s\d{2}){2}$" value="<?php if (isset($flash['inputs'][':telephone'])) echo $flash['inputs'][':telephone']; ?>"/>
                             <label for="telephone">Téléphone - <em>facultatif</em></label>
                         </div>
                         <!--Choix du sexe -->
@@ -54,11 +54,11 @@
                                 Sexe
                             </p>
                             <p>
-                                <input name="sexe" type="radio" id="sexeF" value="F" <?php if(isset($flash['inputs']['sexe']) and $flash['inputs']['sexe'] === "F") echo "checked"; ?>/>
+                                <input name="sexe" type="radio" id="sexeF" value="F" <?php if(!isset($flash['inputs'][':sexe']) or (isset($flash['inputs'][':sexe']) and $flash['inputs'][':sexe'] === "F")) echo "checked"; ?>/>
                                 <label for="sexeF">Femme</label>
                             </p>
                             <p>
-                                <input name="sexe" type="radio" id="sexeH" value="H" <?php if(isset($flash['inputs']['sexe']) and $flash['inputs']['sexe'] === "H") echo "checked"; ?>/>
+                                <input name="sexe" type="radio" id="sexeH" value="H" <?php if(isset($flash['inputs'][':sexe']) and $flash['inputs'][':sexe'] === "H") echo "checked"; ?>/>
                                 <label for="sexeH">Homme</label>
                             </p>
                         </div>

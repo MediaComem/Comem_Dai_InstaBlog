@@ -29,7 +29,7 @@
                     <td><?= $user['Prenom'] ?></td>
                     <td class="center-align"><?= $user['DateNaissance'] ?></td>
                     <td><?= $user['Email'] ?></td>
-                    <td><?= $user['Telephone'] ?></td>
+                    <td><?= $user['Telephone'] ? $user['Telephone'] : '-' ?></td>
                     <td class="center-align"><?= $user['Sexe'] ?></td>
                 </tr>
             <?php } ?>
