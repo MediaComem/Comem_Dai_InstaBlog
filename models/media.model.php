@@ -18,15 +18,19 @@ class Media {
     return array();
   }
   
-  public static function createOne($inputs) {
+  /**
+   * Créer une nouvelle entrée dans la base de données avec les valeurs présentes dans $values.
+   * @param {Array} $values - L'ensemble des valeurs du nouvel enregistrement
+   */
+  public static function createOne($values) {
     $db = option('db_conn');
     $request =
       'INSERT INTO '.self::$table.' (DateCreation, Url, Stockage)
       VALUES(:dateCreation, :url, :stockage)';
     $req = $db->prepare($request);
     
-    // PDO va remplacer les placeholder par les bonnes valeurs tirées de $inputs
-    if ($req->execute($inputs)) {
+    // PDO va remplacer les placeholder par les bonnes valeurs tirées de $values
+    if ($req->execute($values)) {
       return true;
     } else {
       throw new Exception("Erreur lors de l'ajout du nouveau média !");
@@ -34,19 +38,19 @@ class Media {
   }
   
   /**
-   * Valide que les données contenues dans $inputs respectent les contraintes relatives à un média.
+   * Valide que les données contenues dans $values respectent les contraintes relatives à un média.
    * Retourne un tableau contenant les messages d'erreurs à afficher en cas de problèmes.
    * Si aucun problème n'est détecté, retourne NULL.
-   * @param {Array} $inputs - Un tableau contenant toutes les valeurs du nouveau Média à créer
+   * @param {Array} $values - Un tableau contenant toutes les valeurs du nouveau Média à créer
    */
-  public static function validate(array $inputs) {
+  public static function validate(array $values) {
     $errors = [];
     // Date de création antérieure à aujourd'hui
     // URL commence par "/" ou "X:\" si stockage Interne, et "http://" ou "https://" si stockage externe
-    if ($inputs[':stockage'] === "interne") {
-      if (strpos($inputs[':url'], "/") !== 0 and strpos($inputs[':url'], ":\\") !== 1) array_push($errors, "Pour un stockage interne, l'url doit commencer par \"/\" ou une lettre de lecteur comme \"C:\\\" ou \"D:\\\".");
-    } elseif ($inputs[':stockage'] === 'externe') {
-      if (strpos($inputs['url'], "http://") !== 0 and strpos($inputs['url'], "https://") !== 0) array_push($errors, "Pour un stockage externe, l'url doit commencer par \"http://\" ou \"https://\".");
+    if ($values[':stockage'] === "interne") {
+      if (strpos($values[':url'], "/") !== 0 and strpos($values[':url'], ":\\") !== 1) array_push($errors, "Pour un stockage interne, l'url doit commencer par \"/\" ou une lettre de lecteur comme \"C:\\\" ou \"D:\\\".");
+    } elseif ($values[':stockage'] === 'externe') {
+      if (strpos($values['url'], "http://") !== 0 and strpos($values['url'], "https://") !== 0) array_push($errors, "Pour un stockage externe, l'url doit commencer par \"http://\" ou \"https://\".");
     }
 
     return $errors;

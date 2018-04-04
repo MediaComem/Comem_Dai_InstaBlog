@@ -36,9 +36,9 @@ class Utilisateur {
   }
   
   /**
-   * Créer une nouvelle entrée dans la base de données avec les valeurs présentes dans $inputs.
+   * Créer une nouvelle entrée dans la base de données avec les valeurs présentes dans $values.
    */
-  public static function createOne($inputs) {
+  public static function createOne($values) {
     $db = option('db_conn');
 
     $request = 
@@ -46,8 +46,8 @@ class Utilisateur {
       VALUES (:pseudo, :email, :nom, :prenom, :dateNaissance, :telephone, :sexe)";
     $req = $db->prepare($request);
 
-    // PDO va remplacer les placeholder par les bonnes valeurs tirées de $inputs
-    if ($req->execute($inputs)) {
+    // PDO va remplacer les placeholder par les bonnes valeurs tirées de $values
+    if ($req->execute($values)) {
       return true;
     } else {
       throw new Exception("Erreur lors de l'ajout du nouvel utilisateur !");
@@ -55,26 +55,26 @@ class Utilisateur {
   }
 
   /**
-   * Valide que les données contenues dans $inputs respectent les contraintes relatives à un utilisateur.
+   * Valide que les données contenues dans $values respectent les contraintes relatives à un utilisateur.
    * Retourne un tableau contenant les messages d'erreurs à afficher en cas de problèmes.
    * Si aucun problème n'est détecté, retourne NULL.
-   * @param {Array} $inputs - Un tableau contenant toutes les valeurs du nouvel Utilisateur à créer
+   * @param {Array} $values - Un tableau contenant toutes les valeurs du nouvel Utilisateur à créer
    */
-  public static function validate(array $inputs) {
+  public static function validate(array $values) {
     $errors = [];
 
     // Pseudo déjà existant
-    $user = Utilisateur::find($inputs[':pseudo']);
+    $user = Utilisateur::find($values[':pseudo']);
     // Si $user n'est pas vide, c'est que le pseudo existe déjà en BD, donc ça ne joue pas
-    if (!empty($user)) array_push($errors, "Le pseudo \"".$inputs[':pseudo']."\" est déjà utilisé.");
+    if (!empty($user)) array_push($errors, "Le pseudo \"".$values[':pseudo']."\" est déjà utilisé.");
     
     // Date de naissance dans le passé
     // Convertion de l'input en objet Date
-    $date = new DateTime($inputs[':dateNaissance']);
+    $date = new DateTime($values[':dateNaissance']);
     // Génération d'un objet à la date d'aujourd'hui
     $today = new DateTime(date('Y-m-d'));
     // Si la date de l'input est plus grande ou égale à la date d'aujourd'hui, ça ne joue pas
-    if ($date >= $today) array_push($errors, "La date du ".$inputs[':dateNaissance']." n'est pas valide comme date de naissance.");
+    if ($date >= $today) array_push($errors, "La date du ".$values[':dateNaissance']." n'est pas valide comme date de naissance.");
 
     return $errors;
   }

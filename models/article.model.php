@@ -21,12 +21,12 @@ class Article {
   }
 
   /**
-   * Valide que les données contenues dans $inputs respectent les contraintes relatives à un article.
+   * Valide que les données contenues dans $values respectent les contraintes relatives à un article.
    * Retourne un tableau contenant les messages d'erreurs à afficher en cas de problèmes.
    * Si aucun problème n'est détecté, retourne NULL.
-   * @param {Array} $inputs - Un tableau contenant toutes les valeurs du nouvel article à créer
+   * @param {Array} $values - Un tableau contenant toutes les valeurs du nouvel article à créer
    */
-  public static function validate(array $inputs) {
+  public static function validate(array $values) {
     // TODO
   }
 }

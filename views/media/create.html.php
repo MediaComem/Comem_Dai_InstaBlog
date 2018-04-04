@@ -12,12 +12,6 @@
             <div class="card">
                 <div class="card-content">
                     <div class="row">
-                        <!-- Date de création du média -->
-                        <div class="input-field col s12 m6">
-                            <!-- Doit être inférieure à aujourd'hui -->
-                            <label class="active" for="dateCreation">Date de création</label>
-                            <input type="date" name="dateCreation" id="dateCreation" required value="<?php if (isset($flash['inputs'][':dateCreation'])) echo $flash['inputs'][':dateCreation']; ?>">
-                        </div>
                         <!-- Url de stockage du média -->
                         <div class="input-field col s12">
                             <!-- Aucune restriction à faire pour ce champ -->

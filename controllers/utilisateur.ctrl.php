@@ -27,7 +27,7 @@ class UtilisateurCtrl {
    * Vérifie auparavant que les valeurs reçues depuis HTML sont correctes, compte tenu des diverses contraintes.
    */
   public static function store() {
-    $inputs = [
+    $values = [
       ':pseudo' => empty($_POST['pseudo']) ? null : $_POST['pseudo'],
       ':nom' => empty($_POST['nom']) ? null : $_POST['nom'],
       ':prenom' => empty($_POST['prenom']) ? null : $_POST['prenom'],
@@ -37,30 +37,30 @@ class UtilisateurCtrl {
       ':sexe' => empty($_POST['sexe']) ? null : $_POST['sexe']
     ];
 
-    $errors = Utilisateur::validate($inputs);
+    $errors = Utilisateur::validate($values);
     
     // Si le tableau des erreurs n'est pas vide...
     if (!empty($errors)) {
       // Les messages d'erreur seront disponibles dans la vue
       flash('errors', $errors);
       // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-      flash('inputs', $inputs);
+      flash('inputs', $values);
       // Redirige l'utilisateur sur le formulaire de création.
       return moveTo('/utilisateur/create');
     // Sinon, c'est que tout est bon !
     }
     
     try {
-      Utilisateur::createOne($inputs);
+      Utilisateur::createOne($values);
       // Le deuxième paramètre sera disponible dans la vue
-      flash('success', "L'utilisateur ".$inputs['pseudo']." a bien été créé !");
+      flash('success', "L'utilisateur ".$values['pseudo']." a bien été créé !");
       // Redirige l'utilisateur sur le formulaire de création.
       return moveTo('/utilisateur');
     } catch(Exception $e) {
       // Le message de l'erreur sera disponible dans la vue
       flash('error', $e->getMessage());
       // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-      flash('inputs', $inputs);
+      flash('inputs', $values);
       // Redirige l'utilisateur sur le formulaire de création.
       return moveTo('/utilisateur/create');
     }

@@ -28,7 +28,7 @@ class ArticleCtrl {
    */
   public static function store() {
 
-    $inputs = [
+    $values = [
       'titre' => filter_has_var(INPUT_POST, 'titre') ? $_POST['titre'] : null,
       'chapeau' => filter_has_var(INPUT_POST, 'chapeau') ? $_POST['chapeau'] : null,
       'contenu' => filter_has_var(INPUT_POST, 'contenu') ? $_POST['contenu'] : null,
@@ -43,7 +43,7 @@ class ArticleCtrl {
     // Le deuxième paramètre sera disponible dans la vue
     flash('info', 'Fonctionnalité à implémenter !');
     // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $inputs);
+    flash('inputs', $values);
     // Redirige l'utilisateur sur le formulaire de création.
     return moveTo('/article/create');
   }

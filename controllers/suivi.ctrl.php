@@ -28,7 +28,7 @@ class SuiviCtrl {
    */
   public static function store() {
 
-    $inputs = [
+    $values = [
       'estSuiviParNoUtilr' => empty($_POST['estSuiviParNoUtilr']) ? null : $_POST['estSuiviParNoUtilr'],
       'suitNoUtilr' => filter_has_var(INPUT_POST, 'suitNoUtilr') ? $_POST['suitNoUtilr'] : null,
     ];
@@ -36,7 +36,7 @@ class SuiviCtrl {
     // Le deuxième paramètre sera disponible dans la vue
     flash('info', 'Fonctionnalité à implémenter !');
     // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $inputs);
+    flash('inputs', $values);
     // Redirige l'utilisateur sur le formulaire de création.
     return moveTo('/suivi/create');
   }

@@ -28,7 +28,7 @@ class MembreCtrl {
    */
   public static function store() {
 
-    $inputs = [
+    $values = [
       'noGrpe' => empty($_POST['noGrpe']) ? null : $_POST['noGrpe'],
       'noUtilr' => filter_has_var(INPUT_POST, 'noUtilr') ? $_POST['noUtilr'] : null,
     ];
@@ -36,7 +36,7 @@ class MembreCtrl {
     // Le deuxième paramètre sera disponible dans la vue
     flash('info', 'Fonctionnalité à implémenter !');
     // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $inputs);
+    flash('inputs', $values);
     // Redirige l'utilisateur sur le formulaire de création.
     return moveTo('/membre/create');
   }

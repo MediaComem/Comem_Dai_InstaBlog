@@ -28,7 +28,7 @@ class PostCtrl {
    */
   public static function store() {
 
-    $inputs = [
+    $values = [
       'no' => filter_has_var(INPUT_POST, 'no') ? $_POST['no'] : null,
       'noUtilr' => filter_has_var(INPUT_POST, 'noUtilr') ? $_POST['noUtilr'] : null,
       'dateCreation' => filter_has_var(INPUT_POST, 'dateCreation') ? $_POST['dateCreation'] : null,
@@ -42,7 +42,7 @@ class PostCtrl {
     // Le deuxième paramètre sera disponible dans la vue
     flash('info', 'Fonctionnalité à implémenter !');
     // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $inputs);
+    flash('inputs', $values);
     // Redirige l'utilisateur sur le formulaire de création.
     return moveTo('/post/create');
   }

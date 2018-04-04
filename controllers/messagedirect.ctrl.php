@@ -28,7 +28,7 @@ class MessageDirectCtrl {
    */
   public static function store() {
 
-    $inputs = [
+    $values = [
       'no' => filter_has_var(INPUT_POST, 'no') ? $_POST['no'] : null,
       'noUtilrEmetteur' => filter_has_var(INPUT_POST, 'noUtilrEmetteur') ? $_POST['noUtilrEmetteur'] : null,
       'noUtilrRecepteur' => filter_has_var(INPUT_POST, 'noUtilrRecepteur') ? $_POST['noUtilrRecepteur'] : null,
@@ -41,7 +41,7 @@ class MessageDirectCtrl {
     // Le deuxième paramètre sera disponible dans la vue
     flash('info', 'Fonctionnalité à implémenter !');
     // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $inputs);
+    flash('inputs', $values);
     // Redirige l'utilisateur sur le formulaire de création.
     return moveTo('/messagedirect/create');
   }
