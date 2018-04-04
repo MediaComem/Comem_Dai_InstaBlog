@@ -13,7 +13,7 @@
                 <div class="card-content">
                     <span class="card-title amber-text text-darken-4">Émetteur</span>
                     <div class="input-field">
-                        <input type="number" min="1" step="1" name="noUtilrEmetteur" id="noUtilrEmetteur" required value="<?php if (isset($flash['inputs']['noUtilrEmetteur'])) echo $flash['inputs']['noUtilrEmetteur']; ?>">
+                        <input type="number" min="1" step="1" name="noUtilrEmetteur" id="noUtilrEmetteur" required value="<?php if (isset($flash['values'][':noUtilrEmetteur'])) echo $flash['values'][':noUtilrEmetteur']; ?>">
                         <label for="noUtilrEmetteur">Numéro utilisateur</label>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                 <div class="card-content">
                     <span class="card-title amber-text text-darken-4">Récepteur</span>
                     <div class="input-field">
-                        <input type="number" min="1" step="1" name="noUtilrRecepteur" id="noUtilrRecepteur" required value="<?php if (isset($flash['inputs']['noUtilrRecepteur'])) echo $flash['inputs']['noUtilrRecepteur']; ?>">
+                        <input type="number" min="1" step="1" name="noUtilrRecepteur" id="noUtilrRecepteur" required value="<?php if (isset($flash['values'][':noUtilrRecepteur'])) echo $flash['values'][':noUtilrRecepteur']; ?>">
                         <label for="noUtilrRecepteur">Numéro utilisateur</label>
                     </div>
                 </div>
@@ -38,12 +38,12 @@
                         <!-- Titre du message direct -->
                         <div class="input-field col s12">
                             <!-- Aucune restriction à faire pour ce champ -->
-                            <input required type="text" name="titre" id="titre" value="<?php if (isset($flash['inputs']['titre'])) echo $flash['inputs']['titre']; ?>"/>
+                            <input required type="text" name="titre" id="titre" value="<?php if (isset($flash['values'][':titre'])) echo $flash['values'][':titre']; ?>"/>
                             <label for="titre">Titre</label>
                         </div>
                         <!-- Contenu du message direct -->
                         <div class="input-field col s12">
-                            <textarea id="contenu" name="contenu" class="materialize-textarea"><?php if (isset($flash['inputs']['contenu'])) echo $flash['inputs']['contenu']; ?></textarea>
+                            <textarea id="contenu" name="contenu" class="materialize-textarea"><?php if (isset($flash['values'][':contenu'])) echo $flash['values'][':contenu']; ?></textarea>
                             <label for="contenu">Contenu</label>
                         </div>
                     </div>
@@ -58,14 +58,14 @@
                         <!-- ID du message direct -->
                         <div class="input-field col s12 m6">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="repondANo" id="repondANo" value="<?php if (isset($flash['inputs']['repondANo'])) echo $flash['inputs']['repondANo']; ?>"/>
+                            <input type="number" min="1" step="1" name="repondANo" id="repondANo" value="<?php if (isset($flash['values'][':repondANo'])) echo $flash['values'][':repondANo']; ?>"/>
                             <label for="repondANo">Numéro de message</label>
                         </div>
                         <!-- ID de l'auteur du message direct -->
                         <div class="input-field col s12 m6">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="repondANoUtilr" id="repondANoUtilr" value="<?php if (isset($flash['inputs']['repondANoUtilr'])) echo $flash['inputs']['repondANoUtilr']; ?>"/>
-                            <label for="repondANoUtilr">Numéro de message</label>
+                            <input type="number" min="1" step="1" name="repondANoUtilr" id="repondANoUtilr" value="<?php if (isset($flash['values'][':repondANoUtilr'])) echo $flash['values'][':repondANoUtilr']; ?>"/>
+                            <label for="repondANoUtilr">Numéro d'utilisateur émetteur</label>
                         </div>
                     </div>
                 </div>

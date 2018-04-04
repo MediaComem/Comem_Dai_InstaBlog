@@ -27,27 +27,30 @@ class MediaCtrl {
    * Vérifie auparavant que les valeurs reçues depuis HTML sont correctes, compte tenu des diverses contraintes.
    */
   public static function store() {
+    // Récupération des valeurs saisies
     $values = [
-      ':dateCreation' => empty($_POST['dateCreation']) ? null : $_POST['dateCreation'],
       ':url' => empty($_POST['url']) ? null : $_POST['url'],
       ':stockage' => empty($_POST['stockage']) ? null : $_POST['stockage']
     ];
 
+    // Validation des contraintes
     $errors = Media::validate($values);
 
+    // En cas d'erreurs de validation
     if (!empty($errors)) {
       flash('errors', $errors);
-      flash('inputs', $values);
+      flash('values', $values);
       return moveTo('/media/create');
     }
     
+    // Tentative de sauvegarde du nouvel enregistrement
     try {
       Media::createOne($values);
-      flash('success', "Le média a bien été créé !");
+      flash('success', "Média créé !");
       return moveTo('/media');
     } catch(Exception $e) {
-      flash('error', "Erreur lors de l'ajout du nouveau média !");
-      flash('inputs', $values);
+      flash('error', "Erreur lors de l'ajout du nouveau média...");
+      flash('values', $values);
       moveTo('/media/create');
     }
   }

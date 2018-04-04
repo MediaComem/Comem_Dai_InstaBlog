@@ -29,23 +29,48 @@ class ArticleCtrl {
   public static function store() {
 
     $values = [
-      'titre' => filter_has_var(INPUT_POST, 'titre') ? $_POST['titre'] : null,
-      'chapeau' => filter_has_var(INPUT_POST, 'chapeau') ? $_POST['chapeau'] : null,
-      'contenu' => filter_has_var(INPUT_POST, 'contenu') ? $_POST['contenu'] : null,
-      'dateCreation' => filter_has_var(INPUT_POST, 'dateCreation') ? $_POST['dateCreation'] : null,
-      'datePublication' => filter_has_var(INPUT_POST, 'datePublication') ? $_POST['datePublication'] : null,
-      'dateFinPublication' => filter_has_var(INPUT_POST, 'dateFinPublication') ? $_POST['dateFinPublication'] : null,
+      // Tableau des valeurs pour l'article
+      'article' => [
+        ':titre' => empty($_POST['titre']) ? null : $_POST['titre'],
+        ':chapeau' => empty($_POST['chapeau']) ? null : $_POST['chapeau'],
+        ':contenu' => empty($_POST['contenu']) ? null : $_POST['contenu'],
+        // Date création à générer au moment de la sauvegarde de l'article
+        ':datePublication' => empty($_POST['datePublication']) ? null : $_POST['datePublication'],
+        ':dateFinPublication' => empty($_POST['dateFinPublication']) ? null : $_POST['dateFinPublication']
+      ],
       // Arrays
-      'historique' => filter_has_var(INPUT_POST, 'historique') ? $_POST['historique'] : null,
-      'themes' => filter_has_var(INPUT_POST, 'themes') ? $_POST['themes'] : null
+      'historique' => empty($_POST['historique']) ? null : $_POST['historique'],
+      'themes' => empty($_POST['themes']) ? null : $_POST['themes']
     ];
-    
-    // Le deuxième paramètre sera disponible dans la vue
-    flash('info', 'Fonctionnalité à implémenter !');
-    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $values);
-    // Redirige l'utilisateur sur le formulaire de création.
-    return moveTo('/article/create');
+
+    // dd($values);
+
+    $errors = Article::validate($values);
+
+    if (!empty($errors)) {
+      flash('errors', $errors);
+      flash('values', $values);
+      return moveTo('/article/create');
+    }
+
+    // Puisqu'on va créer plusieurs objets en même temps, on doit commencer une transaction sur la base de donnée
+    option('db_conn')->beginTransaction();
+
+    try {
+      Article::createOne($values);
+      // Si on arrive jusqu'à cette ligne, c'est que toutes les créations se font correctement
+      // Du coup, on "valide" toutes les opérations effectuées sur la base de données
+      option('db_conn')->commit();
+      flash('success', "Article créé !");
+      return moveTo('/article');
+    } catch (Exception $e) {
+      // Si on capte la moindre erreur, c'est qu'une des opérations n'a pas été
+      // Dans ce cas, on annule tout ce qu'on a tenté de faire depuis le début de la transaction
+      option('db_conn')->rollback();
+      flash('error', "Erreur lors de la publication du nouvel article...");
+      flash('values', $values);
+      return moveTo('/article/create');
+    }
   }
 
 }

@@ -16,7 +16,7 @@
                         <!-- ID du membre -->
                         <div class="input-field col s12">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input required type="number" min="1" step="1" name="noGrpe" id="noGrpe" value="<?php if (isset($flash['inputs']['noGrpe'])) echo $flash['inputs']['noGrpe']; ?>"/>
+                            <input required type="number" min="1" step="1" name="noGrpe" id="noGrpe" value="<?php if (isset($flash['values'][':noGrpe'])) echo $flash['values'][':noGrpe']; ?>"/>
                             <label for="noGrpe">Numéro groupe</label>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                         <!-- ID du membre -->
                         <div class="input-field col s12">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="noUtilr" id="noUtilr" value="<?php if (isset($flash['inputs']['noUtilr'])) echo $flash['inputs']['noUtilr']; ?>"/>
+                            <input type="number" min="1" step="1" name="noUtilr" id="noUtilr" value="<?php if (isset($flash['values'][':noUtilr'])) echo $flash['values'][':noUtilr']; ?>"/>
                             <label for="noUtilr">Numéro utilisateur</label>
                         </div>
                     </div>

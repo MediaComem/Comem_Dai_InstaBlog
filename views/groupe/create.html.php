@@ -13,28 +13,22 @@
                 <div class="card-content">
                     <div class="row">
                         <!-- Nom du groupe -->
-                        <div class="input-field col s12">
-                            <!-- Aucune restriction à faire pour ce champ -->
-                            <input required type="text" name="nom" id="nom" value="<?php if (isset($flash['inputs']['nom'])) echo $flash['inputs']['nom']; ?>"/>
-                            <label for="nom">Nom</label>
-                        </div>
-                        <!-- Description du groupe -->
-                        <div class="input-field col s12">
-                            <!-- Aucune restriction à faire pour ce champ -->
-                            <input required type="text" name="description" id="description" value="<?php if (isset($flash['inputs']['description'])) echo $flash['inputs']['description']; ?>"/>
-                            <label for="description">Description</label>
-                        </div>
-                        <!-- Date de création du groupe -->
                         <div class="input-field col s12 m6">
-                            <!-- Doit être inférieure ou égale à aujourd'hui -->
-                            <label class="active" for="dateCreation">Date de création</label>
-                            <input type="date" name="dateCreation" id="dateCreation" required value="<?php if (isset($flash['inputs']['dateCreation'])) echo $flash['inputs']['dateCreation']; ?>">
+                            <!-- Aucune restriction à faire pour ce champ -->
+                            <input required type="text" name="nom" id="nom" value="<?php if (isset($flash['values']['groupe'][':nom'])) echo $flash['values']['groupe'][':nom']; ?>"/>
+                            <label for="nom">Nom</label>
                         </div>
                         <!-- ID de l'administrateur -->
                         <div class="input-field col s12 m6">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="administrateur" id="administrateur" value="<?php if (isset($flash['inputs']['administrateur'])) echo $flash['inputs']['administrateur']; ?>"/>
+                            <input type="number" min="1" step="1" name="administrateur" id="administrateur" value="<?php if (isset($flash['values']['groupe'][':administrateur'])) echo $flash['values']['groupe'][':administrateur']; ?>"/>
                             <label for="administrateur">Numéro de l'administrateur</label>
+                        </div>
+                        <!-- Description du groupe -->
+                        <div class="input-field col s12">
+                            <!-- Aucune restriction à faire pour ce champ -->
+                            <input required type="text" name="description" id="description" value="<?php if (isset($flash['values']['groupe'][':description'])) echo $flash['values']['groupe'][':description']; ?>"/>
+                            <label for="description">Description</label>
                         </div>
                     </div>
                 </div>
@@ -48,8 +42,8 @@
                         <!-- ID du membre -->
                         <div class="input-field col s12">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input required type="number" min="1" step="1" name="membres[0][NoUtilr]" id="membres[0][NoUtilr]" value="<?php if (isset($flash['inputs']['membres'][0]['NoUtilr'])) echo $flash['inputs']['membres'][0]['NoUtilr']; ?>"/>
-                            <label for="membres[0][NoUtilr]">Numéro utilisateur</label>
+                            <input required type="number" min="1" step="1" name="membres[0][:noUtilr]" id="membre1" value="<?php if (isset($flash['values']['membres'][0][':noUtilr'])) echo $flash['values']['membres'][0][':noUtilr']; ?>"/>
+                            <label for="membre1">Numéro utilisateur</label>
                         </div>
                     </div>
                 </div>
@@ -63,8 +57,8 @@
                         <!-- ID du membre -->
                         <div class="input-field col s12">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="membres[1][NoUtilr]" id="membres[1][NoUtilr]" value="<?php if (isset($flash['inputs']['membres'][1]['NoUtilr'])) echo $flash['inputs']['membres'][1]['NoUtilr']; ?>"/>
-                            <label for="membres[1][NoUtilr]">Numéro utilisateur</label>
+                            <input type="number" min="1" step="1" name="membres[1][:noUtilr]" id="membre2" value="<?php if (isset($flash['values']['membres'][1][':noUtilr'])) echo $flash['values']['membres'][1][':noUtilr']; ?>"/>
+                            <label for="membre2">Numéro utilisateur</label>
                         </div>
                     </div>
                 </div>
@@ -78,8 +72,8 @@
                         <!-- ID du membre -->
                         <div class="input-field col s12">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="membres[2][NoUtilr]" id="membres[2][NoUtilr]" value="<?php if (isset($flash['inputs']['membres'][2]['NoUtilr'])) echo $flash['inputs']['membres'][2]['NoUtilr']; ?>"/>
-                            <label for="membres[2][NoUtilr]">Numéro utilisateur</label>
+                            <input type="number" min="1" step="1" name="membres[2][:noUtilr]" id="membre3" value="<?php if (isset($flash['values']['membres'][2][':noUtilr'])) echo $flash['values']['membres'][2][':noUtilr']; ?>"/>
+                            <label for="membre3">Numéro utilisateur</label>
                         </div>
                     </div>
                 </div>

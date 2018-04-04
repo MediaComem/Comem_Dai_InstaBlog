@@ -29,21 +29,31 @@ class MessageDirectCtrl {
   public static function store() {
 
     $values = [
-      'no' => filter_has_var(INPUT_POST, 'no') ? $_POST['no'] : null,
-      'noUtilrEmetteur' => filter_has_var(INPUT_POST, 'noUtilrEmetteur') ? $_POST['noUtilrEmetteur'] : null,
-      'noUtilrRecepteur' => filter_has_var(INPUT_POST, 'noUtilrRecepteur') ? $_POST['noUtilrRecepteur'] : null,
-      'titre' => filter_has_var(INPUT_POST, 'titre') ? $_POST['titre'] : null,
-      'contenu' => filter_has_var(INPUT_POST, 'contenu') ? $_POST['contenu'] : null,
-      'repondANo' => filter_has_var(INPUT_POST, 'repondANo') ? $_POST['repondANo'] : null,
-      'repondANoUtilr' => filter_has_var(INPUT_POST, 'repondANoUtilr') ? $_POST['repondANoUtilr'] : null
+      ':noUtilrEmetteur' => empty($_POST['noUtilrEmetteur']) ? null : $_POST['noUtilrEmetteur'],
+      ':noUtilrRecepteur' => empty($_POST['noUtilrRecepteur']) ? null : $_POST['noUtilrRecepteur'],
+      ':titre' => empty($_POST['titre']) ? null : $_POST['titre'],
+      ':contenu' => empty($_POST['contenu']) ? null : $_POST['contenu'],
+      ':repondANo' => empty($_POST['repondANo']) ? null : $_POST['repondANo'],
+      ':repondANoUtilr' => empty($_POST['repondANoUtilr']) ? null : $_POST['repondANoUtilr']
     ];
-    
-    // Le deuxième paramètre sera disponible dans la vue
-    flash('info', 'Fonctionnalité à implémenter !');
-    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $values);
-    // Redirige l'utilisateur sur le formulaire de création.
-    return moveTo('/messagedirect/create');
+
+    $errors = MessageDirect::validate($values);
+
+    if (!empty($errors)) {
+      flash('errors', $errors);
+      flash('values', $values);
+      return moveTo('/messagedirect/create');
+    }
+
+    try {
+      MessageDirect::createOne($values);
+      flash('success', "Message envoyé !");
+      return moveTo('/messagedirect');
+    } catch(Exception $e) {
+      flash('error', "Erreur lors de l'envoi du message...");
+      flash('values', $values);
+      return moveTo('/messagedirect/create');
+    }
   }
 
 }

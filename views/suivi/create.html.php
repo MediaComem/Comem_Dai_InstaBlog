@@ -16,7 +16,7 @@
                         <!-- ID du membre -->
                         <div class="input-field col s12">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input required type="number" min="1" step="1" name="estSuiviParNoUtilr" id="estSuiviParNoUtilr" value="<?php if (isset($flash['inputs']['estSuiviParNoUtilr'])) echo $flash['inputs']['estSuiviParNoUtilr']; ?>"/>
+                            <input required type="number" min="1" step="1" name="estSuiviParNoUtilr" id="estSuiviParNoUtilr" value="<?php if (isset($flash['values'][':estSuiviParNoUtilr'])) echo $flash['values'][':estSuiviParNoUtilr']; ?>"/>
                             <label for="estSuiviParNoUtilr">Numéro utilisateur</label>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                         <!-- ID du membre -->
                         <div class="input-field col s12">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="suitNoUtilr" id="suitNoUtilr" value="<?php if (isset($flash['inputs']['suitNoUtilr'])) echo $flash['inputs']['suitNoUtilr']; ?>"/>
+                            <input type="number" min="1" step="1" name="suitNoUtilr" id="suitNoUtilr" value="<?php if (isset($flash['values'][':suitNoUtilr'])) echo $flash['values'][':suitNoUtilr']; ?>"/>
                             <label for="suitNoUtilr">Numéro utilisateur</label>
                         </div>
                     </div>

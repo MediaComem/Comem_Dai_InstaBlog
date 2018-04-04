@@ -44,7 +44,7 @@ class UtilisateurCtrl {
       // Les messages d'erreur seront disponibles dans la vue
       flash('errors', $errors);
       // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-      flash('inputs', $values);
+      flash('values', $values);
       // Redirige l'utilisateur sur le formulaire de création.
       return moveTo('/utilisateur/create');
     // Sinon, c'est que tout est bon !
@@ -53,14 +53,14 @@ class UtilisateurCtrl {
     try {
       Utilisateur::createOne($values);
       // Le deuxième paramètre sera disponible dans la vue
-      flash('success', "L'utilisateur ".$values['pseudo']." a bien été créé !");
+      flash('success', "Nouvel utilisateur ".$values['pseudo']." créé !");
       // Redirige l'utilisateur sur le formulaire de création.
       return moveTo('/utilisateur');
     } catch(Exception $e) {
       // Le message de l'erreur sera disponible dans la vue
-      flash('error', $e->getMessage());
+      flash('error', "Erreur lors de la création du nouvel utilisateur...");
       // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-      flash('inputs', $values);
+      flash('values', $values);
       // Redirige l'utilisateur sur le formulaire de création.
       return moveTo('/utilisateur/create');
     }

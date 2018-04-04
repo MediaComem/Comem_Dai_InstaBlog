@@ -12,21 +12,15 @@
             <div class="card">
                 <div class="card-content">
                     <div class="row">
-                        <!-- Date de création du post -->
-                        <div class="input-field col s12 m4">
-                            <!-- Doit être inférieure ou égale à aujourd'hui -->
-                            <label class="active" for="dateCreation">Date de création</label>
-                            <input type="date" name="dateCreation" id="dateCreation" required value="<?php if (isset($flash['inputs']['dateCreation'])) echo $flash['inputs']['dateCreation']; ?>">
-                        </div>
                         <!-- Date de publication du post -->
-                        <div class="input-field col s12 m4">
+                        <div class="input-field col s12 m6">
                             <!-- Doit être inférieure ou égale à aujourd'hui -->
                             <label class="active" for="datePublication">Date de publication</label>
-                            <input type="date" name="datePublication" id="datePublication" required value="<?php if (isset($flash['inputs']['datePublication'])) echo $flash['inputs']['datePublication']; ?>">
+                            <input type="date" name="datePublication" id="datePublication" required value="<?php if (isset($flash['values'][':datePublication'])) echo $flash['values'][':datePublication']; ?>">
                         </div>
                         <!-- Texte du post -->
                         <div class="input-field col s12">
-                            <textarea id="texte" name="texte" class="materialize-textarea"><?php if (isset($flash['inputs']['texte'])) echo $flash['inputs']['texte']; ?></textarea>
+                            <textarea id="texte" name="texte" class="materialize-textarea"><?php if (isset($flash['values'][':texte'])) echo $flash['values'][':texte']; ?></textarea>
                             <label for="texte">Texte - <em>facultatif</em></label>
                         </div>
                         <div class="col s12">
@@ -34,11 +28,11 @@
                                 Type
                             </p>
                             <p>
-                                <input name="type" type="radio" id="typeFlux" value="flux" <?php if(isset($flash['inputs']['type']) and $flash['inputs']['type'] === "flux") echo "checked"; ?>/>
+                                <input name="type" type="radio" id="typeFlux" value="flux" <?php if(!isset($flash['values'][':type']) or (isset($flash['values'][':type']) and $flash['values'][':type'] === "flux")) echo "checked"; ?>/>
                                 <label for="typeFlux">Flux</label>
                             </p>
                             <p>
-                                <input name="type" type="radio" id="typeStory" value="stories" <?php if(isset($flash['inputs']['type']) and $flash['inputs']['type'] === "stories") echo "checked"; ?>/>
+                                <input name="type" type="radio" id="typeStory" value="stories" <?php if(isset($flash['values'][':type']) and $flash['values'][':type'] === "stories") echo "checked"; ?>/>
                                 <label for="typeStory">Story</label>
                             </p>
                         </div>
@@ -53,7 +47,7 @@
                     <!-- ID de l'utilisateur -->
                     <div class="input-field">
                         <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                        <input type="number" min="1" step="1" required name="noUtilr" id="noUtilr" value="<?php if (isset($flash['inputs']['noUtilr'])) echo $flash['inputs']['noUtilr']; ?>"/>
+                        <input type="number" min="1" step="1" required name="noUtilr" id="noUtilr" value="<?php if (isset($flash['values'][':noUtilr'])) echo $flash['values'][':noUtilr']; ?>"/>
                         <label for="noUtilr">Numéro utilisateur</label>
                     </div>               
                 </div>
@@ -66,7 +60,7 @@
                     <!-- Numéro de la position GPS -->
                     <div class="input-field">
                         <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                        <input type="number" min="1" step="1" name="noPosGPS" id="noPosGPS" value="<?php if (isset($flash['inputs']['noPosGPS'])) echo $flash['inputs']['noPosGPS']; ?>"/>
+                        <input type="number" min="1" step="1" name="noPosGPS" id="noPosGPS" value="<?php if (isset($flash['values'][':noPosGPS'])) echo $flash['values'][':noPosGPS']; ?>"/>
                         <label for="noPosGPS">Numéro</label>
                     </div>
                 </div>
@@ -79,7 +73,7 @@
                     <!-- Numéro du groupe où le post est pubié -->
                     <div class="input-field">
                         <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                        <input type="number" min="1" step="1" name="noGrpe" id="noGrpe" value="<?php if (isset($flash['inputs']['noGrpe'])) echo $flash['inputs']['noGrpe']; ?>"/>
+                        <input type="number" min="1" step="1" name="noGrpe" id="noGrpe" value="<?php if (isset($flash['values'][':noGrpe'])) echo $flash['values'][':noGrpe']; ?>"/>
                         <label for="noGrpe">Numéro du groupe</label>
                     </div>
                 </div>

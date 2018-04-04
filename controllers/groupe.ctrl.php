@@ -29,18 +29,20 @@ class GroupeCtrl {
   public static function store() {
 
     $values = [
-      'nom' => empty($_POST['nom']) ? null : $_POST['nom'],
-      'description' => filter_has_var(INPUT_POST, 'description') ? $_POST['description'] : null,
-      'dateCreation' => filter_has_var(INPUT_POST, 'dateCreation') ? $_POST['dateCreation'] : null,
-      'administrateur' => filter_has_var(INPUT_POST, 'administrateur') ? $_POST['administrateur'] : null,
+      'groupe' => [
+        ':nom' => empty($_POST['nom']) ? null : $_POST['nom'],
+        ':description' => empty($_POST['description']) ? null : $_POST['description'],
+        ':administrateur' => empty($_POST['administrateur']) ? null : $_POST['administrateur'],
+        // DateCreation à générer lors de la création du groupe
+      ],
       // Arrays
-      'membres' => filter_has_var(INPUT_POST, 'membres') ? $_POST['membres'] : null
+      'membres' => empty($_POST['membres']) ? null : $_POST['membres']
     ];
-    
+
     // Le deuxième paramètre sera disponible dans la vue
     flash('info', 'Fonctionnalité à implémenter !');
     // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $values);
+    flash('values', $values);
     // Redirige l'utilisateur sur le formulaire de création.
     return moveTo('/groupe/create');
   }

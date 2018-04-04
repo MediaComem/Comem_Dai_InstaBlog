@@ -53,7 +53,7 @@
 
             <?php if (isset($flash['errors']) and count($flash['errors']) > 0) { ?>
                 <div class="card-panel error">
-                    <h5><?= count($flash['errors']) ?> Erreurs</h5>
+                    <h5><?= count($flash['errors']) ?> Erreur<?= count($flash['errors']) > 1 ? "s" : "" ?></h5>
                     <?php foreach($flash['errors'] as $key => $error) { ?>
                         <span><?= $error?></span><br/>
                     <?php } ?>
@@ -70,7 +70,7 @@
                 <div class="container">
                     Media Engineering | 2017 - 2018 | De la données à l'information
                     <span class="right">
-                        <a href="mailto:gabor.maksay@heig-vd.ch" class="amber-text text-lighten-3">Maksay Gabor</a> & <a href="mailto:mathias.oberson@heig-vd.ch" class="amber-text text-lighten-3">Mathias Oberson</a>
+                        <a href="mailto:gabor.maksay@heig-vd.ch" class="amber-text text-lighten-3">Maksay Gabor</a> & <a href="mailto:sebastien.pahud@heig-vd.ch" class="amber-text text-lighten-3">Sébastien Pahud</a> & <a href="mailto:mathias.oberson@heig-vd.ch" class="amber-text text-lighten-3">Mathias Oberson</a>
                     </span>
                 </div>
             </div>

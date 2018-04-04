@@ -25,7 +25,7 @@ class Utilisateur {
    * @param {String} $pseudo - Le pseudo de l'utilisateur à retrouver.
    * @return {Object|Null}
    */
-  public static function find($pseudo) {
+  public static function findByPseudo($pseudo) {
     $db = option('db_conn');
     $req = $db->prepare('SELECT * FROM ' . self::$table . ' WHERE pseudo = :pseudo');
     
@@ -34,9 +34,27 @@ class Utilisateur {
     }
     return null;
   }
+
+  /**
+   * Récupère un utilisateur grâce à son numéro.
+   * Si l'utilisateur existe, il est retourné sous la forme d'un objet correspondant à la ligne dans la BD.
+   * Sinon la méthode retourne null
+   * @param {Number} $no - Le numéro de l'utilisateur à retrouver.
+   * @return {Object|Null}
+   */
+  public static function find($no) {
+    $db = option('db_conn');
+    $req = $db->prepare('SELECT * FROM ' . self::$table . ' WHERE no = :no');
+    
+    if ($req->execute([':no' => $no])) {
+      return $req->fetch(PDO::FETCH_OBJ);
+    }
+    return null;
+  }
   
   /**
    * Créer une nouvelle entrée dans la base de données avec les valeurs présentes dans $values.
+   * @param {Array} $values - L'ensemble des valeurs du nouvel enregistrement
    */
   public static function createOne($values) {
     $db = option('db_conn');
@@ -64,7 +82,7 @@ class Utilisateur {
     $errors = [];
 
     // Pseudo déjà existant
-    $user = Utilisateur::find($values[':pseudo']);
+    $user = Utilisateur::findByPseudo($values[':pseudo']);
     // Si $user n'est pas vide, c'est que le pseudo existe déjà en BD, donc ça ne joue pas
     if (!empty($user)) array_push($errors, "Le pseudo \"".$values[':pseudo']."\" est déjà utilisé.");
     

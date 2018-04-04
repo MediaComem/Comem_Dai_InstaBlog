@@ -29,16 +29,27 @@ class MembreCtrl {
   public static function store() {
 
     $values = [
-      'noGrpe' => empty($_POST['noGrpe']) ? null : $_POST['noGrpe'],
-      'noUtilr' => filter_has_var(INPUT_POST, 'noUtilr') ? $_POST['noUtilr'] : null,
+      ':noGrpe' => empty($_POST['noGrpe']) ? null : $_POST['noGrpe'],
+      ':noUtilr' => empty($_POST['noUtilr']) ? null : $_POST['noUtilr']
     ];
-    
-    // Le deuxième paramètre sera disponible dans la vue
-    flash('info', 'Fonctionnalité à implémenter !');
-    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $values);
-    // Redirige l'utilisateur sur le formulaire de création.
-    return moveTo('/membre/create');
+
+    $errors = Membre::validate($values);
+
+    if (!empty($errors)) {
+      flash('errors', $errors);
+      flash('values', $values);
+      return moveTo('/membre/create');
+    }
+
+    try {
+      Membre::createOne($values);
+      flash('success', "Membre ajouté !");
+      return moveTo('/membre');
+    } catch (Exception $e) {
+      flash('error', "Erreur lors de l'ajout du nouveau membre...");
+      flash('values', $values);
+      return moveTo('/membre/create');
+    }
   }
 
 }

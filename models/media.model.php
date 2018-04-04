@@ -15,7 +15,7 @@ class Media {
     if ($req->execute()) {
       return $req->fetchAll();
     }
-    return array();
+    return null;
   }
   
   /**
@@ -29,6 +29,9 @@ class Media {
       VALUES(:dateCreation, :url, :stockage)';
     $req = $db->prepare($request);
     
+    // Ajout de la date du jour comme DateCreation
+    $values[':dateCreation'] = date('Y-m-d');
+
     // PDO va remplacer les placeholder par les bonnes valeurs tirées de $values
     if ($req->execute($values)) {
       return true;
@@ -45,12 +48,12 @@ class Media {
    */
   public static function validate(array $values) {
     $errors = [];
-    // Date de création antérieure à aujourd'hui
-    // URL commence par "/" ou "X:\" si stockage Interne, et "http://" ou "https://" si stockage externe
-    if ($values[':stockage'] === "interne") {
-      if (strpos($values[':url'], "/") !== 0 and strpos($values[':url'], ":\\") !== 1) array_push($errors, "Pour un stockage interne, l'url doit commencer par \"/\" ou une lettre de lecteur comme \"C:\\\" ou \"D:\\\".");
-    } elseif ($values[':stockage'] === 'externe') {
-      if (strpos($values['url'], "http://") !== 0 and strpos($values['url'], "https://") !== 0) array_push($errors, "Pour un stockage externe, l'url doit commencer par \"http://\" ou \"https://\".");
+
+    // URL commence par "/" ou "X:" si stockage Interne, et "http://" ou "https://" si stockage externe
+    if ($values[':stockage'] === "interne" and !preg_match("#^(/|[A-Z]:)#", $values[':url'])) {
+      array_push($errors, "Pour un stockage interne, l'url doit commencer par \"/\" ou une lettre de lecteur comme \"C:\" ou \"D:\".");
+    } elseif ($values[':stockage'] === 'externe' and !preg_match("#^(http://|https://)#", $values[':url'])) {
+      array_push($errors, "Pour un stockage externe, l'url doit commencer par \"http://\" ou \"https://\".");
     }
 
     return $errors;

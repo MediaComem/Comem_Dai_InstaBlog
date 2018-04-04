@@ -29,22 +29,31 @@ class PostCtrl {
   public static function store() {
 
     $values = [
-      'no' => filter_has_var(INPUT_POST, 'no') ? $_POST['no'] : null,
-      'noUtilr' => filter_has_var(INPUT_POST, 'noUtilr') ? $_POST['noUtilr'] : null,
-      'dateCreation' => filter_has_var(INPUT_POST, 'dateCreation') ? $_POST['dateCreation'] : null,
-      'datePublication' => filter_has_var(INPUT_POST, 'datePublication') ? $_POST['datePublication'] : null,
-      'type' => filter_has_var(INPUT_POST, 'type') ? $_POST['type'] : null,
-      'texte' => filter_has_var(INPUT_POST, 'texte') ? $_POST['texte'] : null,
-      'noPosGPS' => filter_has_var(INPUT_POST, 'noPosGPS') ? $_POST['noPosGPS'] : null,
-      'noGrpe' => filter_has_var(INPUT_POST, 'noGrpe') ? $_POST['noGrpe'] : null,
+      ':noUtilr' => empty($_POST['noUtilr']) ? null : $_POST['noUtilr'],
+      ':datePublication' => empty($_POST['datePublication']) ? null : $_POST['datePublication'],
+      ':type' => empty($_POST['type']) ? null : $_POST['type'],
+      ':texte' => empty($_POST['texte']) ? null : $_POST['texte'],
+      ':noPosGPS' => empty($_POST['noPosGPS']) ? null : $_POST['noPosGPS'],
+      ':noGrpe' => empty($_POST['noGrpe']) ? null : $_POST['noGrpe'],
     ];
-    
-    // Le deuxième paramètre sera disponible dans la vue
-    flash('info', 'Fonctionnalité à implémenter !');
-    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('inputs', $values);
-    // Redirige l'utilisateur sur le formulaire de création.
-    return moveTo('/post/create');
+
+    $errors = Post::validate($values);
+
+    if (!empty($errors)) {
+      flash('errors', $errors);
+      flash('values', $values);
+      return moveTo('/post/create');
+    }
+
+    try {
+      Post::createOne($values);
+      flash('success', "Nouveau post créé !");
+      return moveTo('/post');
+    } catch (Exception $e) {
+      flash('error', "Erreur lors de la publication du nouveau post...");
+      flash('values', $values);
+      return moveTo('/post/create');
+    }
   }
 
 }
