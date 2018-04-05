@@ -17,8 +17,8 @@
         <tbody>
             <?php foreach($suivis as $key => $suivi) { ?>
                 <tr>
-                    <td class="center-align"><?= $suivi['SuitNoUtilr'] ?></td>
                     <td class="center-align"><?= $suivi['EstSuiviParNoUtilr'] ?></td>
+                    <td class="center-align"><?= $suivi['SuitNoUtilr'] ?></td>
                 </tr>
             <?php } ?>
         </tbody>
