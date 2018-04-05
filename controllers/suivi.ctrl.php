@@ -29,27 +29,19 @@ class SuiviCtrl {
   public static function store() {
 
     $values = [
-      ':estSuiviParNoUtilr' => empty($_POST['estSuiviParNoUtilr']) ? null : $_POST['estSuiviParNoUtilr'],
-      ':suitNoUtilr' => empty($_POST['suitNoUtilr']) ? null : $_POST['suitNoUtilr']
+      // TODO
     ];
 
-    $errors = Suivi::validate($values);
+    /**
+     * Le code suivant est à supprimer lorsque vous écrirez votre code
+     **/
 
-    if (!empty($errors)) {
-      flash('errors', $errors);
-      flash('values', $values);
-      return moveTo('/suivi/create');
-    }
-
-    try {
-      Suivi::createOne($values);
-      flash('success', "Suivi enregistré !");
-      return moveTo('/suivi');
-    } catch (Exception $e) {
-      flash('error', "Erreur lors de l'enregistrement du suivi...");
-      flash('values', $values);
-      return moveTo('/suivi/create');
-    }
+    // Le message sera affiché dans la page HTML
+    flash('info', "Fonctionnalité à implémenter !");
+    // Les valeurs saisies par l'utilisateur seront affichées dans le formulaire HTML
+    flash('values', $values);
+    // Par défaut, on retourne sur la page du formulaire d'ajout
+    return moveTo('/suivi/create');
   }
 
 }

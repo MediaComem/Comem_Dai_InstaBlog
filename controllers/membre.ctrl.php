@@ -29,27 +29,19 @@ class MembreCtrl {
   public static function store() {
 
     $values = [
-      ':noGrpe' => empty($_POST['noGrpe']) ? null : $_POST['noGrpe'],
-      ':noUtilr' => empty($_POST['noUtilr']) ? null : $_POST['noUtilr']
+      // TODO
     ];
 
-    $errors = Membre::validate($values);
+    /**
+     * Le code suivant est à supprimer lorsque vous écrirez votre code
+     **/
 
-    if (!empty($errors)) {
-      flash('errors', $errors);
-      flash('values', $values);
-      return moveTo('/membre/create');
-    }
-
-    try {
-      Membre::createOne($values);
-      flash('success', "Membre ajouté !");
-      return moveTo('/membre');
-    } catch (Exception $e) {
-      flash('error', "Erreur lors de l'ajout du nouveau membre...");
-      flash('values', $values);
-      return moveTo('/membre/create');
-    }
+    // Le message sera affiché dans la page HTML
+    flash('info', "Fonctionnalité à implémenter !");
+    // Les valeurs saisies par l'utilisateur seront affichées dans le formulaire HTML
+    flash('values', $values);
+    // Par défaut, on retourne sur la page du formulaire d'ajout
+    return moveTo('/membre/create');
   }
 
 }

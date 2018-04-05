@@ -29,31 +29,19 @@ class MessageDirectCtrl {
   public static function store() {
 
     $values = [
-      ':noUtilrEmetteur' => empty($_POST['noUtilrEmetteur']) ? null : $_POST['noUtilrEmetteur'],
-      ':noUtilrRecepteur' => empty($_POST['noUtilrRecepteur']) ? null : $_POST['noUtilrRecepteur'],
-      ':titre' => empty($_POST['titre']) ? null : $_POST['titre'],
-      ':contenu' => empty($_POST['contenu']) ? null : $_POST['contenu'],
-      ':repondANo' => empty($_POST['repondANo']) ? null : $_POST['repondANo'],
-      ':repondANoUtilr' => empty($_POST['repondANoUtilr']) ? null : $_POST['repondANoUtilr']
+      // TODO
     ];
 
-    $errors = MessageDirect::validate($values);
+    /**
+     * Le code suivant est à supprimer lorsque vous écrirez votre code
+     **/
 
-    if (!empty($errors)) {
-      flash('errors', $errors);
-      flash('values', $values);
-      return moveTo('/messagedirect/create');
-    }
-
-    try {
-      MessageDirect::createOne($values);
-      flash('success', "Message envoyé !");
-      return moveTo('/messagedirect');
-    } catch(Exception $e) {
-      flash('error', "Erreur lors de l'envoi du message...");
-      flash('values', $values);
-      return moveTo('/messagedirect/create');
-    }
+    // Le message sera affiché dans la page HTML
+    flash('info', "Fonctionnalité à implémenter !");
+    // Les valeurs saisies par l'utilisateur seront affichées dans le formulaire HTML
+    flash('values', $values);
+    // Par défaut, on retourne sur la page du formulaire d'ajout
+    return moveTo('/messagedirect/create');
   }
 
 }

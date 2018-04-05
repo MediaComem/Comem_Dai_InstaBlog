@@ -29,31 +29,19 @@ class PostCtrl {
   public static function store() {
 
     $values = [
-      ':noUtilr' => empty($_POST['noUtilr']) ? null : $_POST['noUtilr'],
-      ':datePublication' => empty($_POST['datePublication']) ? null : $_POST['datePublication'],
-      ':type' => empty($_POST['type']) ? null : $_POST['type'],
-      ':texte' => empty($_POST['texte']) ? null : $_POST['texte'],
-      ':noPosGPS' => empty($_POST['noPosGPS']) ? null : $_POST['noPosGPS'],
-      ':noGrpe' => empty($_POST['noGrpe']) ? null : $_POST['noGrpe'],
+      // TODO
     ];
 
-    $errors = Post::validate($values);
+    /**
+     * Le code suivant est à supprimer lorsque vous écrirez votre code
+     **/
 
-    if (!empty($errors)) {
-      flash('errors', $errors);
-      flash('values', $values);
-      return moveTo('/post/create');
-    }
-
-    try {
-      Post::createOne($values);
-      flash('success', "Nouveau post créé !");
-      return moveTo('/post');
-    } catch (Exception $e) {
-      flash('error', "Erreur lors de la publication du nouveau post...");
-      flash('values', $values);
-      return moveTo('/post/create');
-    }
+    // Le message sera affiché dans la page HTML
+    flash('info', "Fonctionnalité à implémenter !");
+    // Les valeurs saisies par l'utilisateur seront affichées dans le formulaire HTML
+    flash('values', $values);
+    // Par défaut, on retourne sur la page du formulaire d'ajout
+    return moveTo('/post/create');
   }
 
 }

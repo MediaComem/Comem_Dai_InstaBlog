@@ -29,39 +29,19 @@ class GroupeCtrl {
   public static function store() {
 
     $values = [
-      'groupe' => [
-        ':nom' => empty($_POST['nom']) ? null : $_POST['nom'],
-        ':description' => empty($_POST['description']) ? null : $_POST['description'],
-        ':administrateur' => empty($_POST['administrateur']) ? null : $_POST['administrateur'],
-        // DateCreation à générer lors de la création du groupe
-      ],
-      // Arrays
-      'membres' => empty($_POST['membres']) ? null : $_POST['membres']
+      // TODO
     ];
 
-    $errors = Groupe::validate($values);
+    /**
+     * Le code suivant est à supprimer lorsque vous écrirez votre code
+     **/
 
-    if (!empty($errors)) {
-      flash('errors', $errors);
-      flash('values', $values);
-      return moveTo('/groupe/create');
-    }
-
-    // Puisqu'on va devoir créer plusieurs enregistrements dans la BD, il faut une transaction
-    $db = option('db_conn');
-    $db->beginTransaction();
-
-    try {
-      Groupe::createOne($values);
-      $db->commit();
-      flash('success', "Groupe créé et membres ajoutés !");
-      return moveTo('/groupe');
-    } catch (Exception $e) {
-      $db->rollback();
-      flash('error', "Erreur lors de la création du groupe...");
-      flash('values', $values);
-      return moveTo('/groupe/create');
-    }
+    // Le message sera affiché dans la page HTML
+    flash('info', "Fonctionnalité à implémenter !");
+    // Les valeurs saisies par l'utilisateur seront affichées dans le formulaire HTML
+    flash('values', $values);
+    // Par défaut, on retourne sur la page du formulaire d'ajout
+    return moveTo('/groupe/create');
   }
 
 }

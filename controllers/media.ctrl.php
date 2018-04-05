@@ -27,32 +27,21 @@ class MediaCtrl {
    * Vérifie auparavant que les valeurs reçues depuis HTML sont correctes, compte tenu des diverses contraintes.
    */
   public static function store() {
-    // Récupération des valeurs saisies
+
     $values = [
-      ':url' => empty($_POST['url']) ? null : $_POST['url'],
-      ':stockage' => empty($_POST['stockage']) ? null : $_POST['stockage']
+      // TODO
     ];
 
-    // Validation des contraintes
-    $errors = Media::validate($values);
+    /**
+     * Le code suivant est à supprimer lorsque vous écrirez votre code
+     **/
 
-    // En cas d'erreurs de validation
-    if (!empty($errors)) {
-      flash('errors', $errors);
-      flash('values', $values);
-      return moveTo('/media/create');
-    }
-    
-    // Tentative de sauvegarde du nouvel enregistrement
-    try {
-      Media::createOne($values);
-      flash('success', "Média créé !");
-      return moveTo('/media');
-    } catch(Exception $e) {
-      flash('error', "Erreur lors de l'ajout du nouveau média...");
-      flash('values', $values);
-      moveTo('/media/create');
-    }
+    // Le message sera affiché dans la page HTML
+    flash('info', "Fonctionnalité à implémenter !");
+    // Les valeurs saisies par l'utilisateur seront affichées dans le formulaire HTML
+    flash('values', $values);
+    // Par défaut, on retourne sur la page du formulaire d'ajout
+    return moveTo('/media/create');
   }
 
 }
