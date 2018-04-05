@@ -50,9 +50,10 @@ class Article {
       HistoriqueArticle::createOne($values['historique']);
       // On va ensuite essayer de créer les classification...
       // Mais avant... il faut "nettoyer" le tableau des classifications (enlever celles en double ou vide par exemple)...
-      $values['classifications'] = Classification::cleanData($values['classifications']);
+      // On stocke ce tableau nettoyé dans une nouvelle variable pour en faire une copie (on ne voudrait pas trop toucher au tableau des values)
+      $classifications = Classification::cleanData($values['classifications']);
       // Avec notre tableau tout propre, on peut boucler sur chaque classification pour la créer.
-      foreach($values['classifications'] as $key => $classification) {
+      foreach($classifications as $key => $classification) {
         // On n'oublie pas d'ajouter le numéro de l'article nouvellement créé pour chaque classification
         $classification[':noArtic'] = $values['article'][':no'];
         // On peut, enfin, crééer la classification

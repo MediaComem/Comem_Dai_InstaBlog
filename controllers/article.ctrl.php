@@ -52,19 +52,20 @@ class ArticleCtrl {
     }
 
     // Puisqu'on va créer plusieurs objets en même temps, on doit commencer une transaction sur la base de donnée
-    option('db_conn')->beginTransaction();
+    $db = option('db_conn');
+    $db->beginTransaction();
 
     try {
       Article::createOne($values);
       // Si on arrive jusqu'à cette ligne, c'est que toutes les créations se font correctement
       // Du coup, on "valide" toutes les opérations effectuées sur la base de données
-      option('db_conn')->commit();
+      $db->commit();
       flash('success', "Article créé !");
       return moveTo('/article');
     } catch (Exception $e) {
       // Si on capte la moindre erreur, c'est qu'une des opérations n'a pas été
       // Dans ce cas, on annule tout ce qu'on a tenté de faire depuis le début de la transaction
-      option('db_conn')->rollback();
+      $db->rollback();
       flash('error', "Erreur lors de la publication du nouvel article...");
       flash('values', $values);
       return moveTo('/article/create');

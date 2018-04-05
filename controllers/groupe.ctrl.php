@@ -39,12 +39,29 @@ class GroupeCtrl {
       'membres' => empty($_POST['membres']) ? null : $_POST['membres']
     ];
 
-    // Le deuxième paramètre sera disponible dans la vue
-    flash('info', 'Fonctionnalité à implémenter !');
-    // Les valeurs saisies par l'utilisateur seront disponibles dans la vue
-    flash('values', $values);
-    // Redirige l'utilisateur sur le formulaire de création.
-    return moveTo('/groupe/create');
+    $errors = Groupe::validate($values);
+
+    if (!empty($errors)) {
+      flash('errors', $errors);
+      flash('values', $values);
+      return moveTo('/groupe/create');
+    }
+
+    // Puisqu'on va devoir créer plusieurs enregistrements dans la BD, il faut une transaction
+    $db = option('db_conn');
+    $db->beginTransaction();
+
+    try {
+      Groupe::createOne($values);
+      $db->commit();
+      flash('success', "Groupe créé et membres ajoutés !");
+      return moveTo('/groupe');
+    } catch (Exception $e) {
+      $db->rollback();
+      flash('error', "Erreur lors de la création du groupe...");
+      flash('values', $values);
+      return moveTo('/groupe/create');
+    }
   }
 
 }

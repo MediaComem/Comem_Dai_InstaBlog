@@ -34,46 +34,28 @@
                 </div>
             </div>
         </div>
-        <div class="col s4">
+        <div class="col s12">
             <div class="card">
                 <div class="card-content">
-                    <span class="card-title amber-text text-darken-4">Membre 1</span>
+                    <span class="card-title amber-text text-darken-4">Membres</span>
                     <div class="row">
-                        <!-- ID du membre -->
-                        <div class="input-field col s12">
+                        <!-- ID du membre 1 -->
+                        <div class="input-field col s12 m4">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input required type="number" min="1" step="1" name="membres[0][:noUtilr]" id="membre1" value="<?php if (isset($flash['values']['membres'][0][':noUtilr'])) echo $flash['values']['membres'][0][':noUtilr']; ?>"/>
-                            <label for="membre1">Numéro utilisateur</label>
+                            <input required type="number" min="1" step="1" name="membres[1][:noUtilr]" id="membre1" value="<?php if (isset($flash['values']['membres'][1][':noUtilr'])) echo $flash['values']['membres'][1][':noUtilr']; ?>"/>
+                            <label for="membre1">Numéro utilisateur 1</label>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col s4">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title amber-text text-darken-4">Membre 2 - <em>facultatif</em></span>
-                    <div class="row">
-                        <!-- ID du membre -->
-                        <div class="input-field col s12">
+                        <!-- ID du membre 2 -->
+                        <div class="input-field col s12 m4">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="membres[1][:noUtilr]" id="membre2" value="<?php if (isset($flash['values']['membres'][1][':noUtilr'])) echo $flash['values']['membres'][1][':noUtilr']; ?>"/>
-                            <label for="membre2">Numéro utilisateur</label>
+                            <input type="number" min="1" step="1" name="membres[2][:noUtilr]" id="membre2" value="<?php if (isset($flash['values']['membres'][2][':noUtilr'])) echo $flash['values']['membres'][2][':noUtilr']; ?>"/>
+                            <label for="membre2">Numéro utilisateur 2 - <em>facultatif</em></label>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col s4">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title amber-text text-darken-4">Membre 3 - <em>facultatif</em></span>
-                    <div class="row">
-                        <!-- ID du membre -->
-                        <div class="input-field col s12">
+                        <!-- ID du membre 3 -->
+                        <div class="input-field col s12 m4">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="membres[2][:noUtilr]" id="membre3" value="<?php if (isset($flash['values']['membres'][2][':noUtilr'])) echo $flash['values']['membres'][2][':noUtilr']; ?>"/>
-                            <label for="membre3">Numéro utilisateur</label>
+                            <input type="number" min="1" step="1" name="membres[3][:noUtilr]" id="membre3" value="<?php if (isset($flash['values']['membres'][3][':noUtilr'])) echo $flash['values']['membres'][3][':noUtilr']; ?>"/>
+                            <label for="membre3">Numéro utilisateur 3 - <em>facultatif</em></label>
                         </div>
                     </div>
                 </div>

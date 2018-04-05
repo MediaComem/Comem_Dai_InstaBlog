@@ -26,7 +26,7 @@ class Classification {
 
   /**
    * Nettoie le contenu du tableau des classification obtenu lors de l'envoi d'un formulaire d'ajout d'un nouvel article
-   * Ce nettoyage va surtout supprimer du tableau les éventuels thèmes en double.
+   * Ce nettoyage va surtout supprimer du tableau les éventuels thèmes en double et ceux qui sont "vides" (non saisis dans l'IHM).
    * @param {Array} $data - Un tableau de tableaux contenant des numéros de thèmes
    * @return {Array} - Le tableau initial moins les éventuels doublons
    */
