@@ -48,6 +48,8 @@ function configure() {
 
 /* --- Définition du layout principal --- */
 function before() {
+  // Toutes les pages générées utliseront le layout "master"
+  // Ce dernier contient la navigation et le footer.
   layout('layouts/master.html.php');
 }
 
