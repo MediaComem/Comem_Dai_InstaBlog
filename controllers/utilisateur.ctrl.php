@@ -1,5 +1,7 @@
 <?php
 
+require_once('models/utilisateur.model.php');
+
 class UtilisateurCtrl {
   
   /**
