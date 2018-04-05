@@ -54,11 +54,11 @@
                                 Sexe
                             </p>
                             <p>
-                                <input name="sexe" type="radio" id="sexeF" value="F" <?php if(!isset($flash['values'][':sexe']) or (isset($flash['values'][':sexe']) and $flash['values'][':sexe'] === "F")) echo "checked"; ?>/>
+                                <input name="sexe" type="radio" id="sexeF" value="f" <?php if(!isset($flash['values'][':sexe']) or (isset($flash['values'][':sexe']) and $flash['values'][':sexe'] === "F")) echo "checked"; ?>/>
                                 <label for="sexeF">Femme</label>
                             </p>
                             <p>
-                                <input name="sexe" type="radio" id="sexeH" value="H" <?php if(isset($flash['values'][':sexe']) and $flash['values'][':sexe'] === "H") echo "checked"; ?>/>
+                                <input name="sexe" type="radio" id="sexeH" value="h" <?php if(isset($flash['values'][':sexe']) and $flash['values'][':sexe'] === "H") echo "checked"; ?>/>
                                 <label for="sexeH">Homme</label>
                             </p>
                         </div>
