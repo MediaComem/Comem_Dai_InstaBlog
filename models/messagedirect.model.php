@@ -112,13 +112,16 @@ class MessageDirect {
    */
   public static function nextNumberFor($noUtilr) {
     $db = option('db_conn');
-    $req = $db->prepare("SELECT MAX(No) + 1 AS nextNo FROM ".self::$table." WHERE NoUtilrEmetteur = :noUtilr");
+    // L'idée est de récupérer le plus grand numéro de post pour l'utilisateur indiqué
+    $req = $db->prepare("SELECT MAX(No) AS nextNo FROM ".self::$table." WHERE NoUtilrEmetteur = :noUtilr");
     
     if ($req->execute([':noUtilr' => $noUtilr])) {
       // Le résultat est retourné sous la forme d'un objet avec une propriété du même nom que l'alias : nextNo.
       $result = $req->fetch(PDO::FETCH_OBJ);
-      // On ne retourne que le numéro, pas l'objet complet.
-      return $result->nextNo;
+      // Si la propriété nextNo de l'objet result est vide, c'est qu'il s'agit du premier post pour cet utilisateur
+      // Dans ce cas, on doit juste retourner 1 manuellement.
+      // Si la propriété possède une valeur, il nous faut y faire + 1 pour avoir la nouvelle valeur
+      return empty($result->nextNo) ? 1 : $result->nextNo + 1;
     } else {
       // Si un problème est survenu lors de l'exécution de la requête
       // On lance une exception avec le message d'erreur de l'exécution ratée
