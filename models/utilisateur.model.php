@@ -88,7 +88,7 @@ class Utilisateur {
     // Si $user n'est pas vide, c'est que le pseudo existe déjà en BD, donc ça ne joue pas
     if (!empty($user)) array_push($errors, "Le pseudo \"".$values[':pseudo']."\" est déjà utilisé.");
     
-    // Date de naissance dans le passé
+    // Date de naissance dans le futur
     // Convertion de l'input en objet Date
     $date = new DateTime($values[':dateNaissance']);
     // Génération d'un objet à la date d'aujourd'hui
