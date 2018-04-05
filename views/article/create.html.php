@@ -67,46 +67,28 @@
                 </div>
             </div>
         </div>
-        <div class="col s4">
+        <div class="col s12">
             <div class="card">
                 <div class="card-content">
-                    <span class="card-title amber-text text-darken-4">Theme 1</span>
+                    <span class="card-title amber-text text-darken-4">Classifications</span>
                     <div class="row">
-                        <!-- ID du theme -->
-                        <div class="input-field col s12">
+                        <!-- ID du theme 1-->
+                        <div class="input-field col s12 m4">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input required type="number" min="1" step="1" name="themes[0][:noTheme]" id="theme1" value="<?php if (isset($flash['values']['themes'][0][':noTheme'])) echo $flash['values']['themes'][0][':noTheme']; ?>"/>
-                            <label for="theme1">Numéro thème</label>
+                            <input required type="number" min="1" step="1" name="classification[1][:noTheme]" id="classification1" value="<?php if (isset($flash['values']['classifications'][1][':noTheme'])) echo $flash['values']['classifications'][1][':noTheme']; ?>"/>
+                            <label for="classification1">Numéro thème 1</label>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col s4">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title amber-text text-darken-4">Theme 2 - <em>facultatif</em></span>
-                    <div class="row">
                         <!-- ID du theme -->
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 m4">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="themes[1][:noTheme]" id="theme2" value="<?php if (isset($flash['values']['themes'][1][':noTheme'])) echo $flash['values']['themes'][1][':noTheme']; ?>"/>
-                            <label for="theme2">Numéro thème</label>
+                            <input type="number" min="1" step="1" name="classification[2][:noTheme]" id="classification2" value="<?php if (isset($flash['values']['classifications'][2][':noTheme'])) echo $flash['values']['classifications'][2][':noTheme']; ?>"/>
+                            <label for="classification2">Numéro thème 2 - <em>facultatif</em></label>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col s4">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title amber-text text-darken-4">Theme 3 - <em>facultatif</em></span>
-                    <div class="row">
                         <!-- ID du theme -->
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 m4">
                             <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="themes[2][:noTheme]" id="theme3" value="<?php if (isset($flash['values']['themes'][2][':noTheme'])) echo $flash['values']['themes'][2][':noTheme']; ?>"/>
-                            <label for="theme3">Numéro thème</label>
+                            <input type="number" min="1" step="1" name="classification[3][:noTheme]" id="classification3" value="<?php if (isset($flash['values']['classifications'][3][':noTheme'])) echo $flash['values']['classifications'][3][':noTheme']; ?>"/>
+                            <label for="classification3">Numéro thème 3 - <em>facultatif</em></label>
                         </div>
                     </div>
                 </div>

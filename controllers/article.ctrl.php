@@ -40,10 +40,8 @@ class ArticleCtrl {
       ],
       // Arrays
       'historique' => empty($_POST['historique']) ? null : $_POST['historique'],
-      'themes' => empty($_POST['themes']) ? null : $_POST['themes']
+      'classifications' => empty($_POST['classification']) ? null : $_POST['classification']
     ];
-
-    // dd($values);
 
     $errors = Article::validate($values);
 

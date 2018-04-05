@@ -1,6 +1,8 @@
 <?php
 
 require_once('historiquearticle.model.php');
+require_once('theme.model.php');
+require_once('classification.model.php');
 
 class Article {
   private static $table = 'ARTIC';
@@ -39,12 +41,24 @@ class Article {
 
     // PDO va remplacer les placeholder par les bonnes valeurs tirées de $values
     if ($req->execute($values['article'])) {
-      $historique = $values['historique'];
+      // On récupère dans notre tableau de valeur d'article la valeur de son numéro (puisqu'on va la réutiliser juste après)
+      $values['article'][':no'] = $db->lastInsertId();
       // On ajoute dans le tableau des valeurs de l'historique l'id du nouvel article créé
-      $historique[':noArtic'] = $db->lastInsertId();
+      $values['historique'][':noArtic'] = $values['article'][':no'];
       // On essaie de créer le nouvel historique pour le nouvel article
       // Si une erreur survient, la méthode HistoriqueArticle::createOne lèvera une erreur qui sera interceptée par le try/catch du contrôleur
-      HistoriqueArticle::createOne($historique);
+      HistoriqueArticle::createOne($values['historique']);
+      // On va ensuite essayer de créer les classification...
+      // Mais avant... il faut "nettoyer" le tableau des classifications (enlever celles en double ou vide par exemple)...
+      $values['classifications'] = Classification::cleanData($values['classifications']);
+      // Avec notre tableau tout propre, on peut boucler sur chaque classification pour la créer.
+      foreach($values['classifications'] as $key => $classification) {
+        // On n'oublie pas d'ajouter le numéro de l'article nouvellement créé pour chaque classification
+        $classification[':noArtic'] = $values['article'][':no'];
+        // On peut, enfin, crééer la classification
+        // À nouveau, si une erreur survient à n'importe quel moment, la transaction va tout annuler
+        Classification::createOne($classification);
+      }
       return true;
     } else {
       throw new Exception($req->errorInfo()[2]);
@@ -76,7 +90,13 @@ class Article {
     $user = Utilisateur::find($values['historique'][':noUtilr']);
     if (empty($user)) array_push($errors, "Utilisateur inexistant.");
 
-    // Tous les thèmes présentes existent (À vérifier)
+    // Tous les thèmes présents existent
+    foreach ($values['classifications'] as $key => $classification) {
+      if (!empty($classification[':noTheme'])) {
+        $theme = Theme::find($classification[':noTheme']);
+        if (empty($theme)) array_push($errors, "Thème ".$key." inexistant.");
+      }
+    }
 
     return $errors;
   }
