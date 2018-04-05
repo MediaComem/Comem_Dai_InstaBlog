@@ -68,7 +68,9 @@ class Utilisateur {
     if ($req->execute($values)) {
       return true;
     } else {
-      throw new Exception("Erreur lors de l'ajout du nouvel utilisateur !");
+      // Si un problème est survenu lors de l'exécution de la requête
+      // On lance une exception avec le message d'erreur de l'exécution ratée
+      throw new Exception($req->errorInfo()[2]);
     }
   }
 
@@ -82,7 +84,7 @@ class Utilisateur {
     $errors = [];
 
     // Pseudo déjà existant
-    $user = Utilisateur::findByPseudo($values[':pseudo']);
+    $user = self::findByPseudo($values[':pseudo']);
     // Si $user n'est pas vide, c'est que le pseudo existe déjà en BD, donc ça ne joue pas
     if (!empty($user)) array_push($errors, "Le pseudo \"".$values[':pseudo']."\" est déjà utilisé.");
     

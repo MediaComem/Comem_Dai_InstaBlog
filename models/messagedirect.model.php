@@ -16,10 +16,8 @@ class MessageDirect {
 
     if ($req->execute()) {
       return $req->fetchAll();
-    } else {
-      halt($req->errorInfo()[2]);
     }
-    return array();
+    return null;
   }
 
   /**
@@ -53,13 +51,15 @@ class MessageDirect {
     $req = $db->prepare($request);
 
     // Génération du numéro de message direct selon l'émetteur
-    $values[':no'] = MessageDirect::nextNumberFor($values[':noUtilrEmetteur']);
+    $values[':no'] = self::nextNumberFor($values[':noUtilrEmetteur']);
 
     // PDO va remplacer les placeholder par les bonnes valeurs tirées de $values
     if ($req->execute($values)) {
       return true;
     } else {
-      throw new Exception("Erreur lors de l'ajout du nouvel utilisateur !");
+      // Si un problème est survenu lors de l'exécution de la requête
+      // On lance une exception avec le message d'erreur de l'exécution ratée
+      throw new Exception($req->errorInfo()[2]);
     }
   }
 
@@ -84,14 +84,16 @@ class MessageDirect {
     if (empty($recepteur)) array_push($errors, "Utilisateur récepteur inexistant.");
 
     // Si Répond à...
-    // Les deux doivent être présents
+    // ...le numéro du message doit être là si le numéro de l'utilisateur de ce message est présent
     if (!empty($values[':repondANo']) and empty($values[':repondANoUtilr'])) {
       array_push($errors, "Le numéro utilisateur de l'émetteur du message auquel répondre est obligatoire si le numéro de ce message est présent.");
+    // ...le numéro de l'utilisateur du message doit être là si le numéro de ce message est présent
     } else if (empty($values[':repondANo']) and !empty($values[':repondANoUtilr'])) {
       array_push($errors, "Le numéro du message auquel répondre est obligatoire si le numéro utilisateur de l'émetteur de ce message est présent.");
+    // Si les deux valeurs sont bien présentes...
     } else if (!empty($values[':repondANo']) and !empty($values[':repondANoUtilr'])) {
-      // ... Existence du message précédent
       $message = self::find($values[':repondANo'], $values[':repondANoUtilr']);
+      // ... Existence du message précédent
       if (empty($message)) {
         array_push($errors, "Impossible de répondre à un message inexistant.");
       // Correspondance entre émetteur et récepteur du message auquel on répond
@@ -118,7 +120,9 @@ class MessageDirect {
       // On ne retourne que le numéro, pas l'objet complet.
       return $result->nextNo;
     } else {
-      throw new Exception("Erreur lors de l'ajout du nouveau post !");
+      // Si un problème est survenu lors de l'exécution de la requête
+      // On lance une exception avec le message d'erreur de l'exécution ratée
+      throw new Exception($req->errorInfo()[2]);
     }
   }
 }

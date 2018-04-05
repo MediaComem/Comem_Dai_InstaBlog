@@ -55,7 +55,9 @@ class Membre {
     if ($req->execute($values)) {
       return true;
     } else {
-      throw new Exception("Erreur lors de l'enregistrement du nouveau membre !");
+      // Si un problème est survenu lors de l'exécution de la requête
+      // On lance une exception avec le message d'erreur de l'exécution ratée
+      throw new Exception($req->errorInfo()[2]);
     }
   }
   
@@ -78,7 +80,7 @@ class Membre {
 
     // Membre inexistant
     if (!empty($groupe) and !empty($utilisateur)) {
-      $membre = Membre::find($groupe, $utilisateur);
+      $membre = self::find($groupe, $utilisateur);
       if (!empty($membre)) array_push($errors, "Cet utilisateur est déjà membre de ce groupe.");
     }
 

@@ -17,7 +17,7 @@ class Suivi {
     if ($req->execute()) {
       return $req->fetchAll();
     }
-    return array();
+    return null;
   }
 
   /**
@@ -54,7 +54,9 @@ class Suivi {
     if ($req->execute($values)) {
       return true;
     } else {
-      throw new Exception("Erreur lors de l'enregistrement du nouveau suivi !");
+      // Si un problème est survenu lors de l'exécution de la requête
+      // On lance une exception avec le message d'erreur de l'exécution ratée
+      throw new Exception($req->errorInfo()[2]);
     }
   }
   
@@ -80,7 +82,7 @@ class Suivi {
     
     // Suivi n'existe pas déjà
     if (!empty($utilSuiveur) and !empty($utilSuivi)) {
-      $suivi = Suivi::find($utilSuivi, $utilSuiveur);
+      $suivi = self::find($utilSuivi, $utilSuiveur);
       if (!empty($suivi)) array_push($errors, "Ces deux utilisateurs se suivent déjà.");
     }
 

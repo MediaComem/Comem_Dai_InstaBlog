@@ -20,7 +20,9 @@ class Classification {
     if ($req->execute($values)) {
       return true;
     } else {
-      throw new Exception("Erreur lors de l'enregistrement de la nouvelle classification !");
+      // Si un problème est survenu lors de l'exécution de la requête
+      // On lance une exception avec le message d'erreur de l'exécution ratée
+      throw new Exception($req->errorInfo()[2]);
     }
   }
 

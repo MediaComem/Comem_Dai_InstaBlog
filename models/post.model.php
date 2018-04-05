@@ -1,6 +1,8 @@
 <?php
 
 require_once('positiongps.model.php');
+require_once('groupe.model.php');
+require_once('utilisateur.model.php');
 
 class Post {
   private static $table = 'POST';
@@ -40,7 +42,9 @@ class Post {
     if ($req->execute($values)) {
       return true;
     } else {
-      throw new Exception("Erreur lors de l'ajout du nouveau post !");
+      // Si un problème est survenu lors de l'exécution de la requête
+      // On lance une exception avec le message d'erreur de l'exécution ratée
+      throw new Exception($req->errorInfo()[2]);
     }
   }
 
@@ -95,7 +99,9 @@ class Post {
       // On ne retourne que le numéro, pas l'objet complet.
       return $result->nextNo;
     } else {
-      throw new Exception("Erreur lors de l'ajout du nouveau post !");
+      // Si un problème est survenu lors de l'exécution de la requête
+      // On lance une exception avec le message d'erreur de l'exécution ratée
+      throw new Exception($req->errorInfo()[2]);
     }
   }
 }

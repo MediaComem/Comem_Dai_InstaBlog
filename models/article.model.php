@@ -3,6 +3,7 @@
 require_once('historiquearticle.model.php');
 require_once('theme.model.php');
 require_once('classification.model.php');
+require_once('utilisateur.model.php');
 
 class Article {
   private static $table = 'ARTIC';
@@ -18,10 +19,8 @@ class Article {
 
     if ($req->execute()) {
       return $req->fetchAll();
-    } else {
-      halt($req->errorInfo()[2]);
     }
-    return array();
+    return null;
   }
 
   /**
@@ -62,6 +61,8 @@ class Article {
       }
       return true;
     } else {
+      // Si un problème est survenu lors de l'exécution de la requête
+      // On lance une exception avec le message d'erreur de l'exécution ratée
       throw new Exception($req->errorInfo()[2]);
     }
   }
@@ -79,7 +80,7 @@ class Article {
     // Date de publication supérieure ou égale à la date du jour
     $date = new DateTime($values['article'][':datePublication']);
     $today = new DateTime(date('Y-m-d'));
-    if ($date < $today) array_push($errors, "La date du ".$values[':datePublication']." n'est pas valide comme date de publication.");
+    if ($date < $today) array_push($errors, "La date du ".$values['article'][':datePublication']." n'est pas valide comme date de publication.");
 
     // Si présente, la date de fin de publication est supérieure ou égale à la date de publication
     if (!empty($values['article'][':dateFinPublication'])) {
@@ -91,8 +92,9 @@ class Article {
     $user = Utilisateur::find($values['historique'][':noUtilr']);
     if (empty($user)) array_push($errors, "Utilisateur inexistant.");
 
-    // Tous les thèmes présents existent
+    // Boucler sur tous les themes pour vérifier que...
     foreach ($values['classifications'] as $key => $classification) {
+      // ...tous les thèmes présents (ceux non-vides, donc) existent
       if (!empty($classification[':noTheme'])) {
         $theme = Theme::find($classification[':noTheme']);
         if (empty($theme)) array_push($errors, "Thème ".$key." inexistant.");

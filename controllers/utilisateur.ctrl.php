@@ -53,7 +53,7 @@ class UtilisateurCtrl {
     try {
       Utilisateur::createOne($values);
       // Le deuxième paramètre sera disponible dans la vue
-      flash('success', "Nouvel utilisateur ".$values['pseudo']." créé !");
+      flash('success', "Nouvel utilisateur ".$values[':pseudo']." créé !");
       // Redirige l'utilisateur sur le formulaire de création.
       return moveTo('/utilisateur');
     } catch(Exception $e) {
