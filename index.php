@@ -28,10 +28,6 @@ option('ibConf', include('config.php'));
 
 /* --- Configuration de Limonade --- */
 function configure() {
-  // Indique à Limonade que nous utilisons des fichiers de contrôleurs et où ils sont placés, afin qu'il les charge tout seul
-  option('controllers_dir', dirname(__FILE__).'/controllers');
-  // Indique à Limonade où sont situés les fichiers qui servent à générer les vues (les pages HTML, donc)
-  option('views_dir', dirname(__FILE__).'/views');
 
   // Tente de se connecter à la base de données MySQL en utilisant PDO
   try {
