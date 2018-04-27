@@ -6,7 +6,7 @@
     <h3 class="col s12">Nouveau post</h3>
 <?php end_content_for(); ?>
 
-<form action="<?= url_for('/post/create') ?>" method="post" class="col s12">
+<form action="<?= url_for('/post') ?>" method="post" class="col s12">
     <div class="row">
         <div class="col s12">
             <div class="card">
