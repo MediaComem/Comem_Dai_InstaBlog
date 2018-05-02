@@ -1,7 +1,5 @@
 <?php
 
-require_once('positiongps.model.php');
-require_once('groupe.model.php');
 require_once('utilisateur.model.php');
 
 class Post {
@@ -65,21 +63,6 @@ class Post {
     // Utilisateur existant
     $user = Utilisateur::find($values[':noUtilr']);
     if (empty($user)) array_push($errors, "L'utilisateur indiqué n'existe pas.");
-
-    // Si Position GPS, alors existante
-    if (!empty($values[':noPosGPS'])) {
-      $posGPS = PositionGPS::find($values[':noPosGPS']);
-      if (empty($posGPS)) array_push($errors, "La position GPS indiquée n'existe pas.");
-    }
-
-    // Si Groupe...
-    if (!empty($values[':noGrpe'])) {
-      // ... alors pas de type "Story"
-      if ($values[':type'] === "stories") array_push($errors, "Impossible de publier un post de type \"Story\" dans un groupe.");
-      // ... alors groupe existant
-      $groupe = Groupe::find($values[':noGrpe']);
-      if (empty($groupe)) array_push($errors, "Le groupe indiqué n'existe pas.");
-    }
 
     return $errors;
   }

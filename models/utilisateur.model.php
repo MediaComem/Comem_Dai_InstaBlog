@@ -1,6 +1,7 @@
 <?php
 
 class Utilisateur {
+  
   private static $table = 'UTILR';
 
   /**

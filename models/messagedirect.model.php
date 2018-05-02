@@ -46,8 +46,8 @@ class MessageDirect {
     $db = option('db_conn');
 
     $request = 
-      "INSERT INTO ".self::$table." (No, NoUtilrEmetteur, NoUtilrRecepteur, Titre, Contenu, RepondANo, RepondANoUtilr)
-      VALUES (:no, :noUtilrEmetteur, :noUtilrRecepteur, :titre, :contenu, :repondANo, :repondANoUtilr)";
+      "INSERT INTO ".self::$table." (No, NoUtilrEmetteur, NoUtilrRecepteur, Titre, Contenu)
+      VALUES (:no, :noUtilrEmetteur, :noUtilrRecepteur, :titre, :contenu)";
     $req = $db->prepare($request);
 
     // Génération du numéro de message direct selon l'émetteur
@@ -72,9 +72,6 @@ class MessageDirect {
   public static function validate(array $values) {
     $errors = [];
 
-    // Émetteur et récepteur différents
-    if ($values[':noUtilrEmetteur'] === $values[':noUtilrRecepteur']) array_push($errors, "L'émetteur et le récepteur doivent être des utilisateurs différents.");
-
     // Existence de l'émetteur
     $emetteur = Utilisateur::find($values[':noUtilrEmetteur']);
     if (empty($emetteur)) array_push($errors, "Utilisateur émetteur inexistant.");
@@ -83,23 +80,9 @@ class MessageDirect {
     $recepteur = Utilisateur::find($values[':noUtilrRecepteur']);
     if (empty($recepteur)) array_push($errors, "Utilisateur récepteur inexistant.");
 
-    // Si Répond à...
-    // ...le numéro du message doit être là si le numéro de l'utilisateur de ce message est présent
-    if (!empty($values[':repondANo']) and empty($values[':repondANoUtilr'])) {
-      array_push($errors, "Le numéro utilisateur de l'émetteur du message auquel répondre est obligatoire si le numéro de ce message est présent.");
-    // ...le numéro de l'utilisateur du message doit être là si le numéro de ce message est présent
-    } else if (empty($values[':repondANo']) and !empty($values[':repondANoUtilr'])) {
-      array_push($errors, "Le numéro du message auquel répondre est obligatoire si le numéro utilisateur de l'émetteur de ce message est présent.");
-    // Si les deux valeurs sont bien présentes...
-    } else if (!empty($values[':repondANo']) and !empty($values[':repondANoUtilr'])) {
-      $message = self::find($values[':repondANo'], $values[':repondANoUtilr']);
-      // ... Existence du message précédent
-      if (empty($message)) {
-        array_push($errors, "Impossible de répondre à un message inexistant.");
-      // Correspondance entre émetteur et récepteur du message auquel on répond
-      } else if ($message->NoUtilrRecepteur !== $values[':noUtilrEmetteur'] or $message->NoUtilrEmetteur !== $values[':noUtilrRecepteur']) {
-        array_push($errors, "Impossible de répondre au message indiqué (il ne fait pas partie de la conversation entre les utilisateurs indiqués).");
-      }
+    // Émetteur et récepteur différents
+    if (is_object($emetteur) and is_object($recepteur) and $emetteur == $recepteur) {
+      array_push($errors, "L'émetteur et le récepteur doivent être des utilisateurs différents.");
     }
 
     return $errors;

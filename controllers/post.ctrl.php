@@ -33,8 +33,6 @@ class PostCtrl {
       ':datePublication' => empty($_POST['datePublication']) ? null : $_POST['datePublication'],
       ':type' => empty($_POST['type']) ? null : $_POST['type'],
       ':texte' => empty($_POST['texte']) ? null : $_POST['texte'],
-      ':noPosGPS' => empty($_POST['noPosGPS']) ? null : $_POST['noPosGPS'],
-      ':noGrpe' => empty($_POST['noGrpe']) ? null : $_POST['noGrpe'],
     ];
 
     $errors = Post::validate($values);

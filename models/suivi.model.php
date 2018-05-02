@@ -69,19 +69,21 @@ class Suivi {
   public static function validate(array $values) {
     $errors = [];
 
-    // Pas les mêmes utilisateurs
-    if ($values[':estSuiviParNoUtilr'] === $values[':suitNoUtilr']) array_push($errors, "Un utilisateur ne peut pas se suivre lui-même.");
-
     // Utilisateur suivi existe
     $utilSuivi = Utilisateur::find($values[':estSuiviParNoUtilr']);
     if (empty($utilSuivi)) array_push($errors, "L'utilisateur suivi n'existe pas.");
-
+    
     // Utilisateur suiveur existe
     $utilSuiveur = Utilisateur::find($values[':suitNoUtilr']);
     if (empty($utilSuiveur)) array_push($errors, "L'utilisateur suiveur n'existe pas.");
     
-    // Suivi n'existe pas déjà
-    if (!empty($utilSuiveur) and !empty($utilSuivi)) {
+    // Si les deux utilisateurs existent...
+    if (is_object($utilSuiveur) and is_object($utilSuivi)) {
+
+      // Pas les mêmes utilisateurs
+      if ($utilSuiveur == $utilSuivi) array_push($errors, "Un utilisateur ne peut pas se suivre lui-même.");
+
+      // Suivi n'existe pas déjà
       $suivi = self::find($utilSuivi, $utilSuiveur);
       if (!empty($suivi)) array_push($errors, "Ces deux utilisateurs se suivent déjà.");
     }

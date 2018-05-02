@@ -50,27 +50,6 @@
                 </div>
             </div>
         </div>
-        <div class="col s12">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title amber-text text-darken-4">Répond à - <em>facultatif</em></span>
-                    <div class="row">
-                        <!-- ID du message direct -->
-                        <div class="input-field col s12 m6">
-                            <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="repondANo" id="repondANo" value="<?php if (isset($flash['values'][':repondANo'])) echo $flash['values'][':repondANo']; ?>"/>
-                            <label for="repondANo">Numéro de message</label>
-                        </div>
-                        <!-- ID de l'auteur du message direct -->
-                        <div class="input-field col s12 m6">
-                            <!-- min="1" assure ne valide que des nombres positifs. step="1" ne valide que des nombres entiers -->
-                            <input type="number" min="1" step="1" name="repondANoUtilr" id="repondANoUtilr" value="<?php if (isset($flash['values'][':repondANoUtilr'])) echo $flash['values'][':repondANoUtilr']; ?>"/>
-                            <label for="repondANoUtilr">Numéro d'utilisateur émetteur</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <button type="submit" class="btn waves-effect waves-light amber darken-4">Mémoriser</button>
 </form>

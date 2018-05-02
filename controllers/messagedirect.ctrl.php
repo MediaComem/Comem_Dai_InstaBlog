@@ -32,9 +32,7 @@ class MessageDirectCtrl {
       ':noUtilrEmetteur' => empty($_POST['noUtilrEmetteur']) ? null : $_POST['noUtilrEmetteur'],
       ':noUtilrRecepteur' => empty($_POST['noUtilrRecepteur']) ? null : $_POST['noUtilrRecepteur'],
       ':titre' => empty($_POST['titre']) ? null : $_POST['titre'],
-      ':contenu' => empty($_POST['contenu']) ? null : $_POST['contenu'],
-      ':repondANo' => empty($_POST['repondANo']) ? null : $_POST['repondANo'],
-      ':repondANoUtilr' => empty($_POST['repondANoUtilr']) ? null : $_POST['repondANoUtilr']
+      ':contenu' => empty($_POST['contenu']) ? null : $_POST['contenu']
     ];
 
     $errors = MessageDirect::validate($values);
