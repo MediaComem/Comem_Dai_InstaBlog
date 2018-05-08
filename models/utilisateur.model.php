@@ -88,14 +88,6 @@ class Utilisateur {
     $user = self::findByPseudo($values[':pseudo']);
     // Si $user n'est pas vide, c'est que le pseudo existe déjà en BD, donc ça ne joue pas
     if (!empty($user)) array_push($errors, "Le pseudo \"".$values[':pseudo']."\" est déjà utilisé.");
-    
-    // Date de naissance pas dans le futur
-    // Convertion de l'input en objet Date
-    $date = new DateTime($values[':dateNaissance']);
-    // Génération d'un objet à la date d'aujourd'hui
-    $today = new DateTime(date('Y-m-d'));
-    // Si la date de l'input est plus grande ou égale à la date d'aujourd'hui, ça ne joue pas
-    if ($date >= $today) array_push($errors, "La date du ".$values[':dateNaissance']." n'est pas valide comme date de naissance.");
 
     return $errors;
   }

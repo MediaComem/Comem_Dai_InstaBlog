@@ -1,6 +1,7 @@
 <?php
 
 class Media {
+
   private static $table = 'MEDIA';
 
   /**
@@ -41,23 +42,5 @@ class Media {
       throw new Exception($req->errorInfo()[2]);
     }
   }
-  
-  /**
-   * Valide que les données contenues dans $values respectent les contraintes relatives à un média.
-   * Retourne un tableau contenant les messages d'erreurs à afficher en cas de problèmes.
-   * Si aucun problème n'est détecté, retourne NULL.
-   * @param {Array} $values - Un tableau contenant toutes les valeurs du nouveau Média à créer
-   */
-  public static function validate(array $values) {
-    $errors = [];
 
-    // URL commence par "/" ou "X:" si stockage Interne, et "http://" ou "https://" si stockage externe
-    if ($values[':stockage'] === "interne" and !preg_match("#^(/|[A-Z]:)#", $values[':url'])) {
-      array_push($errors, "Pour un stockage interne, l'url doit commencer par \"/\" ou une lettre de lecteur comme \"C:\" ou \"D:\".");
-    } elseif ($values[':stockage'] === 'externe' and !preg_match("#^(http://|https://)#", $values[':url'])) {
-      array_push($errors, "Pour un stockage externe, l'url doit commencer par \"http://\" ou \"https://\".");
-    }
-
-    return $errors;
-  }
 }

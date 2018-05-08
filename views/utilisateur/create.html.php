@@ -40,7 +40,7 @@
                         <div class="input-field col s12 m6">
                             <!-- Doit être inférieure à aujourd'hui -->
                             <label class="active" for="dateNaissance">Date de naissance</label>
-                            <input type="date" name="dateNaissance" id="dateNaissance" required value="<?php if (isset($flash['values'][':dateNaissance'])) echo $flash['values'][':dateNaissance']; ?>">
+                            <input type="date" name="dateNaissance" id="dateNaissance" required max="<?= date('Y-m-d') ?>" value="<?php if (isset($flash['values'][':dateNaissance'])) echo $flash['values'][':dateNaissance']; ?>">
                         </div>
                         <!-- Téléphone de l'utilisateur -->
                         <div class="input-field col s12 m6">
@@ -54,11 +54,11 @@
                                 Sexe
                             </p>
                             <p>
-                                <input name="sexe" type="radio" id="sexeF" value="f" <?php if(!isset($flash['values'][':sexe']) or (isset($flash['values'][':sexe']) and $flash['values'][':sexe'] === "F")) echo "checked"; ?>/>
+                                <input name="sexe" type="radio" id="sexeF" value="f" <?php if(!isset($flash['values'][':sexe']) or (isset($flash['values'][':sexe']) and $flash['values'][':sexe'] === "f")) echo "checked"; ?>/>
                                 <label for="sexeF">Femme</label>
                             </p>
                             <p>
-                                <input name="sexe" type="radio" id="sexeH" value="h" <?php if(isset($flash['values'][':sexe']) and $flash['values'][':sexe'] === "H") echo "checked"; ?>/>
+                                <input name="sexe" type="radio" id="sexeH" value="h" <?php if(isset($flash['values'][':sexe']) and $flash['values'][':sexe'] === "h") echo "checked"; ?>/>
                                 <label for="sexeH">Homme</label>
                             </p>
                         </div>

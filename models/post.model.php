@@ -55,16 +55,27 @@ class Post {
   public static function validate(array $values) {
     $errors = [];
 
-    // Date de publication égale ou supérieure à aujourd'hui
-    $today = new DateTime(date('Y-m-d'));
-    $date = new DateTime($values[':datePublication']);
-    if ($date < $today) array_push($errors, "La date du ".$values[':datePublication']." n'est pas valable comme date de publication.");
-
     // Utilisateur existant
     $user = Utilisateur::find($values[':noUtilr']);
     if (empty($user)) array_push($errors, "L'utilisateur indiqué n'existe pas.");
+    
+    // Date de publication égale ou supérieure à aujourd'hui
+    if (self::isInThePast($values[':datePublication'])) {
+      array_push($errors, "La date du ".$values[':datePublication']." n'est pas valable comme date de publication.");
+    }
 
     return $errors;
+  }
+
+  /**
+   * Vérifie si la date passée en paramètre sous forme de chaîne de caractères est une date dans le passé.
+   * Cette vérification s'effectue en comparant cette date avec la date du jour.
+   * @return {Boolean}
+   */
+  private static function isInThePast($dateAsString) {
+    $today = new DateTime(date('Y-m-d'));
+    $date = new DateTime($dateAsString);
+    return $date < $today;
   }
 
   /**

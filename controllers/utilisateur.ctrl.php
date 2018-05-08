@@ -27,6 +27,7 @@ class UtilisateurCtrl {
    * Vérifie auparavant que les valeurs reçues depuis HTML sont correctes, compte tenu des diverses contraintes.
    */
   public static function store() {
+
     $values = [
       ':pseudo' => empty($_POST['pseudo']) ? null : $_POST['pseudo'],
       ':nom' => empty($_POST['nom']) ? null : $_POST['nom'],

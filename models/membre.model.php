@@ -4,6 +4,7 @@ require_once('utilisateur.model.php');
 require_once('groupe.model.php');
 
 class Membre {
+  
   private static $table = 'MBRE';
 
   /**
@@ -86,7 +87,7 @@ class Membre {
 
     return $errors;
   }
-
+  
   /**
    * Nettoie le contenu du tableau des membres obtenu lors de l'envoi d'un formulaire d'ajout d'un nouveau groupe
    * Ce nettoyage va surtout supprimer du tableau les éventuels membres en double et ceux qui sont "vides" (non saisies dans l'IHM).

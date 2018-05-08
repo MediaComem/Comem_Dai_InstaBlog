@@ -6,6 +6,7 @@ require_once('classification.model.php');
 require_once('utilisateur.model.php');
 
 class Article {
+  
   private static $table = 'ARTIC';
 
   /**
@@ -103,4 +104,5 @@ class Article {
 
     return $errors;
   }
+
 }
