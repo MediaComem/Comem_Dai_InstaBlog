@@ -3,7 +3,7 @@
 require_once('models/article.model.php');
 
 class ArticleCtrl {
-  
+
   /**
    * Affiche l'intégralité des articles présents dans la base de données
    */
@@ -38,10 +38,12 @@ class ArticleCtrl {
         ':datePublication' => empty($_POST['datePublication']) ? null : $_POST['datePublication'],
         ':dateFinPublication' => empty($_POST['dateFinPublication']) ? null : $_POST['dateFinPublication']
       ],
-      // Arrays
+      // Tableaux de champs HTML
       'historique' => empty($_POST['historique']) ? null : $_POST['historique'],
       'classifications' => empty($_POST['classification']) ? null : $_POST['classification']
     ];
+
+    $values['classifications'] = cleanArray($values['classifications']);
 
     $errors = Article::validate($values);
 
