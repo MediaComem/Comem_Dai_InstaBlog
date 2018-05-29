@@ -6,7 +6,7 @@ require_once('classification.model.php');
 require_once('utilisateur.model.php');
 
 class Article {
-  
+
   private static $table = 'ARTIC';
 
   /**
@@ -31,7 +31,7 @@ class Article {
   public static function createOne($values) {
     $db = option('db_conn');
 
-    $request = 
+    $request =
       "INSERT INTO ".self::$table." (Titre, Chapeau, Contenu, DateCreation, DatePublication, DateFinPublication)
       VALUES (:titre, :chapeau, :contenu, :dateCreation, :datePublication, :dateFinPublication)";
     $req = $db->prepare($request);
@@ -78,28 +78,22 @@ class Article {
   public static function validate(array $values) {
     $errors = [];
 
-    // Date de publication supérieure ou égale à la date du jour
-    $date = new DateTime($values['article'][':datePublication']);
-    $today = new DateTime(date('Y-m-d'));
-    if ($date < $today) array_push($errors, "La date du ".$values['article'][':datePublication']." n'est pas valide comme date de publication.");
-
-    // Si présente, la date de fin de publication est supérieure ou égale à la date de publication
-    if (!empty($values['article'][':dateFinPublication'])) {
-      $dateFin = new DateTime($values['article'][':dateFinPublication']);
-      if ($dateFin <= $date) array_push($errors, "La date de fin de publication doit être postérieure à la date de publication.");
-    }
-
-    // NoUtilr de historique existe
+    // Vérifier que l'utilisateur à l'origine de la création de l'article existe
     $user = Utilisateur::find($values['historique'][':noUtilr']);
     if (empty($user)) array_push($errors, "Utilisateur inexistant.");
 
-    // Boucler sur tous les themes pour vérifier que...
+    // Vérification de l'existence de chacun des thèmes
     foreach ($values['classifications'] as $key => $classification) {
-      // ...tous les thèmes présents (ceux non-vides, donc) existent
-      if (!empty($classification[':noTheme'])) {
-        $theme = Theme::find($classification[':noTheme']);
-        if (empty($theme)) array_push($errors, "Thème ".$key." inexistant.");
-      }
+      $theme = Theme::find($classification[':noTheme']);
+      if (empty($theme)) array_push($errors, "Thème ".$key." inexistant.");
+    }
+
+    // Si la date de fin de publication existe...
+    if (!empty($values['article'][':dateFinPublication'])) {
+      $date = new DateTime($values['article'][':datePublication']);
+      $dateFin = new DateTime($values['article'][':dateFinPublication']);
+      // ... on vérifie qu'elle est bien postérieure à la date de publication
+      if ($dateFin <= $date) array_push($errors, "La date de fin de publication doit être postérieure à la date de publication.");
     }
 
     return $errors;
