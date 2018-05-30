@@ -31,7 +31,7 @@ class Groupe {
   public static function find($no) {
     $db = option('db_conn');
     $req = $db->prepare('SELECT * FROM ' . self::$table . ' WHERE no = :no');
-    
+
     if ($req->execute([':no' => $no])) {
       return $req->fetch(PDO::FETCH_OBJ);
     }
@@ -45,7 +45,7 @@ class Groupe {
   public static function createOne($values) {
     $db = option('db_conn');
 
-    $request = 
+    $request =
       "INSERT INTO ".self::$table." (Nom, Description, DateCreation, Administrateur)
       VALUES (:nom, :description, :dateCreation, :administrateur)";
     $req = $db->prepare($request);
@@ -58,10 +58,6 @@ class Groupe {
       // On récupère dans notre tableau de valeur du groupe la valeur de son numéro (puisqu'on va la réutiliser juste après)
       $values['groupe'][':no'] = $db->lastInsertId();
       // On essaie de créer les membres...
-      // Mais avant... il faut "nettoyer" le tableau des membres (enlever ceux en double ou vide par exemple)...
-      // On stocke ce tableau nettoyé dans une nouvelle variable pour en faire une copie (on ne voudrait pas trop toucher au tableau des values)
-      $membres = Membre::cleanData($values['membres']);
-      // Avec notre tableau tout propre, on peut boucler sur chaque membre pour le créer.
       foreach($membres as $key => $membre) {
         // On n'oublie pas d'ajouter le numéro du groupe nouvellement créé pour chaque membre
         $membre[':noGrpe'] = $values['groupe'][':no'];
@@ -92,21 +88,19 @@ class Groupe {
 
     // Va servir pour savoir si l'administrateur indiqué fait parti des membres à ajouter
     $adminFound = false;
-    
+
     // Boucler sur tous les utilisateurs à ajouter comme membre
     foreach ($values['membres'] as $key => $membre) {
-      if (!empty($membre[':noUtilr'])) {
-        // Si le membre en cours a le même id que celui de l'admin indiqué, alors c'est bon, on l'a trouvé
-        if ($membre[':noUtilr'] === $values['groupe'][':administrateur']) $adminFound = true;
+      // Si le membre en cours a le même id que celui de l'admin indiqué, alors c'est bon, on l'a trouvé
+      if ($membre[':noUtilr'] === $values['groupe'][':administrateur']) $adminFound = true;
 
-        // Existence de tous les membres
-        $utilisateur = Utilisateur::find($membre[':noUtilr']);
-        if (empty($utilisateur)) array_push($errors, "L'utilisateur ".$key." n'existe pas.");
-      }
+      // Existence de tous les membres
+      $utilisateur = Utilisateur::find($membre[':noUtilr']);
+      if (empty($utilisateur)) array_push($errors, "L'utilisateur ".$key." n'existe pas.");
     }
 
     // Si $adminFound est toujours sur false, c'est que l'administrateur indiqué ne fait pas partie des membres à ajouter
-    if (!$adminFound) array_push($errors, "L'administrateur être un des membres du groupe.");
+    if (!$adminFound) array_push($errors, "L'administrateur doit être un des membres du groupe.");
 
     return $errors;
   }

@@ -3,7 +3,7 @@
 require_once('models/groupe.model.php');
 
 class GroupeCtrl {
-  
+
   /**
    * Affiche l'intégralité des groupes présents dans la base de données
    */
@@ -38,6 +38,9 @@ class GroupeCtrl {
       // Arrays
       'membres' => empty($_POST['membres']) ? null : $_POST['membres']
     ];
+
+    // Suppressions des numéro de membre en double et de deux ayant une valeurr vide.
+    $values['membres'] = cleanArray($values['membres']);
 
     $errors = Groupe::validate($values);
 
